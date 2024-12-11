@@ -132,7 +132,7 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 # CSVファイルのパスを指定
 #csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
-csv_file_path = r"g:\マイドライブ\ゼミ用\01_10_2024_DA38DDB3C43F_history.csv"
+csv_file_path = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
 
 
 try:
