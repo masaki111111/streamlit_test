@@ -133,8 +133,9 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 #csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
 # = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
-csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\Streamlit_仮\仮想環境_streamlit\05_12_2024_DA38DDB3C43F_history.csv"
-#https://github.com/masaki111111/streamlit_test.git
+csv_file_path = r"c:\05_12_2024_DA38DDB3C43F_history.csv"
+
+
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
     st.write("CSVファイルの読み込みに成功しました。")
