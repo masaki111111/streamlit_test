@@ -14,7 +14,8 @@ import matplotlib.pyplot as plt
 import datetime
 import pytz
 
-df = pd.read_csv('data/CORE_data.csv', sep = ';', header = 1,)
+
+df = pd.read_csv('data/05_12_2024_DA38DDB3C43F_history.csv', sep = ';', header = 1,)
 # df = pd.read_csv('data/CORE_data_1219.csv', sep = ';', header = 1,)
 data = pd.to_datetime(df.iloc[:,0], format = '%d.%m.%Y %H:%M:%S')
 
