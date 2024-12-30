@@ -53,7 +53,7 @@ headers = {
   'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
 }
 response = requests.get(url, headers=headers, params=params) 
-st.write(response.text) #データを表示
+#st.write(response.text) #データを表示
 
 
 
@@ -73,7 +73,7 @@ headers = {
 }
 response = requests.request('GET', url, headers=headers, params=params) 
 a1 =response.json()
-st.write(a1)#これでJsonデータが整列される
+#st.write(a1)#これでJsonデータが整列される
 
 
 #シングルスリープドキュメント(就寝と起床の時間を取得)
@@ -88,7 +88,7 @@ headers = {
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
 a0 = response.json()
-st.write(a0)#これでJsonデータが整列される
+#st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
 date1 = (a0["data"][0]["bedtime_start"])
