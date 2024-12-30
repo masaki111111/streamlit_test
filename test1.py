@@ -320,10 +320,12 @@ if x_choice == "一昨日":
       st.subheader('今日の概日リズム')                                                
       st.plotly_chart(fig,use_container_width=True) 
 
-uploaded_file = st.file_uploader("CSVファイルをアップロードしてください", type=['csv'])
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.write(df)
+# COREの30分前との変化率取得
+chang_rate = plot_data['Temp'].pct_change(30, axis=0)
+plot_data['diff30m'] = chang_rate
+plot_data['diff30m'][plot_data['diff30m']==np.NaN] = 0
+df_cr = pd.DataFrame(chang_rate)
+df_cr['DateTime'] = data
 
 ss1 = '睡眠スコアは'
 ss2 = b
