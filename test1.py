@@ -336,6 +336,35 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 #---------------------------
 
+# 6列目のデータを取得
+if len(df.columns) >= 6:  # 6列以上あるか確認
+        sixth_column = df.iloc[:, 5]  # 6列目 (0-based index)
+
+        # 値が35.0以上の場合は1、未満の場合は0に変換
+        binary_values = (sixth_column >= 35.0).astype(int)
+
+        # 連続した1の長さを計算
+        consecutive_count = binary_values.groupby((binary_values != binary_values.shift()).cumsum()).cumsum()
+
+        # 10行以上連続する部分を探す
+        over_10_rows = consecutive_count[consecutive_count >= 10]
+
+        if not over_10_rows.empty:
+            # 10行以上連続している箇所を抽出
+            indices = over_10_rows.index
+            st.warning("6列目の値が10行以上連続して35.0以上のデータがあります！")
+            
+            # 該当箇所を表示
+            st.subheader("該当データ")
+            for idx in indices:
+                start_idx = idx - over_10_rows.loc[idx] + 1  # 連続開始位置
+                end_idx = idx  # 連続終了位置
+                st.write(df.iloc[start_idx:end_idx + 1])  # 該当範囲を表示
+        else:
+            st.success("10行以上連続で35.0以上のデータはありません。")
+    else:
+        st.error("アップロードされたCSVファイルには6列目がありません。")
+
 # DataFrame Get up Change Rate
 df_gucr = df_cr.query('Temp > 0.003')
 subset_df = df_gucr[df_gucr['date_time_local'] > date_start0 + datetime.timedelta(minutes=30)]
