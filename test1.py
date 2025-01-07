@@ -360,10 +360,9 @@ if len(df.columns) >= 6:  # 6列以上あるか確認
                 start_idx = idx - over_10_rows.loc[idx] + 1  # 連続開始位置
                 end_idx = idx  # 連続終了位置
                 st.write(df.iloc[start_idx:end_idx + 1])  # 該当範囲を表示
-        else:
+else:
             st.success("10行以上連続で35.0以上のデータはありません。")
-    else:
-        st.error("アップロードされたCSVファイルには6列目がありません。")
+
 
 # DataFrame Get up Change Rate
 df_gucr = df_cr.query('Temp > 0.003')
