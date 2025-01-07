@@ -333,8 +333,42 @@ ss3 = 'でした'
 st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 
-# 睡眠時間
+ss1 = '睡眠時間は'
+ss2 = new_duration_in_hrs
+ss3 = '時間でした'
+st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
+#---------------------------
+
+# DataFrame Get up Change Rate
+df_gucr = df_cr.query('Temp > 0.003')
+subset_df = df_gucr[df_gucr['DateTime'] > date_start[0] + datetime.timedelta(minutes=30)]
+df_getup = subset_df.iloc[1,1]
+
+# DataFrame Fall Asleep Change Rate
+df_facr = df_cr.query('Temp < -0.0045')
+facr_df = df_facr[df_facr['DateTime'] > date_start[0]]
+df_fall_asleep = facr_df.iloc[1,1]
+
+# 起床時刻と体温上がり初めの差異
+rhythm_delay = df_getup.strftime('%H時%M分%S秒')
+a = 'あなたの眠ってから体温が上がり始めた時刻は'
+b = 'です'
+c = rhythm_delay
+st.markdown("{0}{1}{2}".format(a,c,b))
+st.caption("深部体温は正常なリズムの場合，入眠と共に低下し，眠っている間は低い状態がキープされ，目覚めに向けて再度上昇していきます．")
+st.caption("深部体温が上昇することで体が活動できるように変化していきます．起床するとさらに深部体温が上昇します．深部体温が上昇し始めるよりも先に起床してしまうのは良い目覚めとは言えません．")
+
+
+# 就寝時刻と体温下がり始めの差異
+rhythm_delay_fa = df_fall_asleep - date_start[0]
+a = 'あなたの眠ってから体温が下がり始めるまでの時間は'
+b = 'です'
+c = rhythm_delay_fa
+st.markdown("{0}{1}{2}".format(a,c,b))
+st.caption("正常なリズムの場合，入眠と共に深部体温は低下していきます．低下しない場合，良い睡眠は得られません．体温の最高値と最低値の差は健康な場合1°C程度です．")
+
+#-------------------------------
 
 # 小数点切り捨て
 n = 1
