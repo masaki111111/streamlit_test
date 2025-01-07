@@ -333,10 +333,6 @@ ss3 = 'でした'
 st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 
-ss1 = '睡眠時間は'
-ss2 = new_duration_in_hrs
-ss3 = '時間でした'
-st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 #---------------------------
 
