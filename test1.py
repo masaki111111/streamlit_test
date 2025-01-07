@@ -325,7 +325,7 @@ chang_rate = plot_data['Temp'].pct_change(30, axis=0)
 plot_data['diff30m'] = chang_rate
 plot_data['diff30m'][plot_data['diff30m']==np.NaN] = 0
 df_cr = pd.DataFrame(chang_rate)
-df_cr['DateTime'] = data
+df_cr['date_time_local'] = data
 
 ss1 = '睡眠スコアは'
 ss2 = b
@@ -338,12 +338,12 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 # DataFrame Get up Change Rate
 df_gucr = df_cr.query('Temp > 0.003')
-subset_df = df_gucr[df_gucr['DateTime'] > date_start0 + datetime.timedelta(minutes=30)]
+subset_df = df_gucr[df_gucr['date_time_local'] > date_start0 + datetime.timedelta(minutes=30)]
 df_getup = subset_df.iloc[1,1]
 
 # DataFrame Fall Asleep Change Rate
 df_facr = df_cr.query('Temp < -0.0045')
-facr_df = df_facr[df_facr['DateTime'] > date_start0]
+facr_df = df_facr[df_facr['date_time_local'] > date_start0]
 df_fall_asleep = facr_df.iloc[1,1]
 
 # 起床時刻と体温上がり初めの差異
