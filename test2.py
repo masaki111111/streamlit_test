@@ -40,12 +40,12 @@ headers = {
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
 }
 response = requests.get(url, headers=headers, params=params) 
-#st.write(response.text) #データを表示
+st.write(response.text) #データを表示
 
 
 
 a2 = response.json()
-#st.write(a2)#これでJsonデータが整列される
+st.write(a2)#これでJsonデータが整列される
 
 
 #1つの睡眠についてのドキュメント
@@ -62,7 +62,7 @@ headers = {
 }
 response = requests.request('GET', url, headers=headers, params=params) 
 a1 =response.json()
-#st.write(a1)#これでJsonデータが整列される
+st.write(a1)#これでJsonデータが整列される
 
 
 #シングルスリープドキュメント(就寝と起床の時間を取得)
