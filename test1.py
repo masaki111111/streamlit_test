@@ -46,8 +46,8 @@ end_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_text':2024-06-28',#'start_date': 'dt_now',
-    'end_text':'2024-06-30'#'end_date': 'dt_now'
+    'start_text':2024-06-28', #'start_date': 'dt_now',
+    'end_text':'2024-06-30' #'end_date': 'dt_now'
 }
 headers = { 
   'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
@@ -102,8 +102,8 @@ date2 = (a0["data"][0]["bedtime_end"])
 date3 = (a0["data"][1]["bedtime_start"])
 date4 = (a0["data"][1]["bedtime_end"])
 
-date5 = (a0["data"][2]["bedtime_start"])#本来2
-date6 = (a0["data"][2]["bedtime_end"]) #本来2
+date5 = (a0["data"][1]["bedtime_start"])#本来2
+date6 = (a0["data"][1]["bedtime_end"]) #本来2
 
 #フォーマット変更
 date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
