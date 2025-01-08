@@ -28,8 +28,7 @@ print(f"今日の日付 (日本時間): {dt_now}")
 
 
 #期間を指定
-start_text = dt_dby
-end_text = dt_now
+start_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
