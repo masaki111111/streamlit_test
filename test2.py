@@ -25,9 +25,7 @@ dt_now = now.strftime('%Y-%m-%d')
 
 # 結果を表示
 print(f"今日の日付 (日本時間): {dt_now}")
-print(f"昨日の日付 (日本時間): {dt_yd}")
-print(f"一昨日の日付 (日本時間): {dt_dby}")
-print(f"三日前の日付 (日本時間): {dt_days_ago_3}")
+
 
 #期間を指定
 start_text = dt_dby
