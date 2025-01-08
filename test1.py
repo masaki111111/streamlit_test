@@ -53,7 +53,7 @@ headers = {
   'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
 }
 response = requests.get(url, headers=headers, params=params) 
-st.write(response.text) #データを表示
+#st.write(response.text) #データを表示
 
 
 
@@ -73,7 +73,7 @@ headers = {
 }
 response = requests.request('GET', url, headers=headers, params=params) 
 a1 =response.json()
-st.write(a1)#これでJsonデータが整列される
+#st.write(a1)#これでJsonデータが整列される
 
 
 #シングルスリープドキュメント(就寝と起床の時間を取得)
@@ -88,7 +88,7 @@ headers = {
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
 a0 = response.json()
-st.write(a0)#これでJsonデータが整列される
+#st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
 date1 = (a0["data"][0]["bedtime_start"])
@@ -97,8 +97,8 @@ date2 = (a0["data"][0]["bedtime_end"])
 date3 = (a0["data"][1]["bedtime_start"])
 date4 = (a0["data"][1]["bedtime_end"])
 
-date5 = (a0["data"][2]["bedtime_start"])#本来2
-date6 = (a0["data"][2]["bedtime_end"]) #本来2
+date5 = (a0["data"][1]["bedtime_start"])#本来2
+date6 = (a0["data"][1]["bedtime_end"]) #本来2
 
 #フォーマット変更
 date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
