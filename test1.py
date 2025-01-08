@@ -46,11 +46,12 @@ end_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_date': 'dt_yd',#start_text,#'2024-06-28', 
-    'end_date': 'dt_now'#end_text #'2024-06-30'
+    'start_text':2024-06-28',#'start_date': 'dt_now',#start_text,#'2024-06-28', 
+    'end_text':'2024-06-30'#'end_date': 'dt_now'#end_text #'2024-06-30'
 }
 headers = { 
   'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
 }
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response.text) #データを表示
@@ -65,12 +66,14 @@ a2 = response.json()
 import requests 
 url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
 params={ 
-    'start_date': 'dt_yd', 
-    'end_date': 'dt_now'   #6-28~30
+    'start_text' :'2024-06-28', 
+    'end_text' :'2024-06-30' #'start_date': 'dt_yd', 
+    #'end_date': 'dt_now'   #6-28~30
 }
 
 headers = { 
   'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
 }
 response = requests.request('GET', url, headers=headers, params=params) 
 a1 =response.json()
@@ -80,11 +83,12 @@ a1 =response.json()
 #シングルスリープドキュメント(就寝と起床の時間を取得)
 url = 'https://api.ouraring.com/v2/usercollection/sleep'
 params = {
-    'start_date': 'dt_yd',#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
-    'end_date': 'dt_now'#end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
+    'start_text': '2024-06-28', #start_text (全期間が欲しい場合)
+    'end_text' : '2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
   'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
 }
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
@@ -98,8 +102,8 @@ date2 = (a0["data"][0]["bedtime_end"])
 date3 = (a0["data"][1]["bedtime_start"])
 date4 = (a0["data"][1]["bedtime_end"])
 
-date5 = (a0["data"][1]["bedtime_start"])#本来2
-date6 = (a0["data"][1]["bedtime_end"]) #本来2
+date5 = (a0["data"][2]["bedtime_start"])#本来2
+date6 = (a0["data"][2]["bedtime_end"]) #本来2
 
 #フォーマット変更
 date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
