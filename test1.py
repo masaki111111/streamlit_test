@@ -46,7 +46,7 @@ end_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_text':2024-06-28', #'start_date': 'dt_now',
+    'start_text':'2024-06-28', #'start_date': 'dt_now',
     'end_text':'2024-06-30' #'end_date': 'dt_now'
 }
 headers = { 
