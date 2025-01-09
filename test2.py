@@ -113,7 +113,7 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 #csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
 # = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
-csv_file_path = "data/11_06_2024_DA38DDB3C43F_history.csv"
+csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
 
 try:
