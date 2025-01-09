@@ -32,7 +32,7 @@ start_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_date': 'dt_now'#start_text,#'2024-06-28', 
+    'start_date': '2024-06-30'#start_text,#'2024-06-28', 
 
 }
 headers = { 
@@ -52,7 +52,7 @@ st.write(a2)#これでJsonデータが整列される
 import requests 
 url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
 params={ 
-    'start_date': 'dt_now'
+    'start_date': '2024-06-30'
    
 }
 
@@ -68,7 +68,7 @@ st.write(a1)#これでJsonデータが整列される
 #シングルスリープドキュメント(就寝と起床の時間を取得)
 url = 'https://api.ouraring.com/v2/usercollection/sleep'
 params = {
-    'start_date': 'dt_now'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
+    'start_date': '2024-06-30'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
     #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
