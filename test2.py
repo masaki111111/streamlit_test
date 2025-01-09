@@ -32,7 +32,7 @@ start_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_date': '2024-06-30'#start_text,#'2024-06-28', 
+    'start_date': '2025-01-08'#start_text,#'2024-06-28', 
 
 }
 headers = { 
@@ -52,7 +52,7 @@ a2 = response.json()
 import requests 
 url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
 params={ 
-    'start_date': '2024-06-30'
+    'start_date': '2025-01-08'#2024 06 30
    
 }
 
@@ -68,7 +68,7 @@ a1 =response.json()
 #シングルスリープドキュメント(就寝と起床の時間を取得)
 url = 'https://api.ouraring.com/v2/usercollection/sleep'
 params = {
-    'start_date': '2024-06-30'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
+    'start_date': '2025-01-08'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
     #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
@@ -151,12 +151,7 @@ new_datetime_yd = plot_data_yd['date_time_local'] + datetime.timedelta(days=1)
 
 # COREの一昨日のデータ
 #df_dby = pd.read_csv('data/CORE_data_dby.csv', sep = ';', header = 1)
-try:
-    df_dby = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
-except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
-    st.stop()
+
 
 data_dby = pd.to_datetime(df_dby.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
@@ -312,33 +307,51 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 #---------------------------
 
-# 6列目のデータを取得
-if len(df.columns) >= 6:  # 6列以上あるか確認
-        sixth_column = df.iloc[:, 5]  # 6列目 (0-based index)
+st.title("皮膚温度比較プログラム")
 
-        # 値が35.0以上の場合は1、未満の場合は0に変換
-        binary_values = (sixth_column >= 35.0).astype(int)
+    # 日時情報のカラムをdatetime型に変換
+try:
+        df['datetime'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
+except Exception as e:
+        st.error("日時情報の変換に失敗しました。形式を確認してください。")
+        st.stop()
 
-        # 連続した1の長さを計算
-        consecutive_count = binary_values.groupby((binary_values != binary_values.shift()).cumsum()).cumsum()
+# 22時以降のデータをフィルタリング
+df_after_22 = df[df['datetime'].dt.hour >= 22]
 
-        # 10行以上連続する部分を探す
-        over_10_rows = consecutive_count[consecutive_count >= 10]
-
-        if not over_10_rows.empty:
-            # 10行以上連続している箇所を抽出
-            indices = over_10_rows.index
-            st.warning("6列目の値が10行以上連続して35.0以上のデータがあります！")
-            
-            # 該当箇所を表示
-            st.subheader("該当データ")
-            for idx in indices:
-                start_idx = idx - over_10_rows.loc[idx] + 1  # 連続開始位置
-                end_idx = idx  # 連続終了位置
-                st.write(df.iloc[start_idx:end_idx + 1])  # 該当範囲を表示
+if df_after_22.empty:
+        st.warning("22時以降のデータが見つかりません。")
 else:
-            st.success("10行以上連続で35.0以上のデータはありません。")
+    # データの確認
+    st.write("22時以降のデータ:")
+    st.dataframe(df_after_22)
 
+    # 6列目のデータを取得
+    if len(df_after_22.columns) >= 6:
+        skin_temp = df_after_22.iloc[:, 5]  # 6列目（0始まり）
+
+        # データが十分にあるか確認
+        if len(skin_temp) >= 16:
+            # 過去10行と現在6行の平均を計算
+            past_avg = skin_temp.iloc[-16:-10].mean()
+            current_avg = skin_temp.iloc[-6:].mean()
+
+            # 平均値を表示
+            st.write(f"過去10行（6行前まで）の平均皮膚温度: {past_avg:.2f}")
+            st.write(f"現在6行の平均皮膚温度: {current_avg:.2f}")
+
+            # 温度の比較
+            if current_avg > past_avg:
+                st.success("現在の平均皮膚温度は過去よりも上昇しています。")
+            else:
+                st.info("現在の平均皮膚温度は過去よりも上昇していません。")
+        else:
+            st.warning("22時以降のデータが16行以上必要です。")
+    else:
+        st.error("CSVファイルに6列以上のデータが必要です。")
+
+
+#---------------------------
 
 # DataFrame Get up Change Rate
 df_gucr = df_cr.query('Temp > 0.003')
