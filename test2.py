@@ -315,7 +315,11 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 #---------------------------
 
-
+    try:
+        df['datetime'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
+    except Exception as e:
+        st.error("日時情報の変換に失敗しました。形式を確認してください。")
+        st.stop()
     # 22時以降のデータをフィルタリング
     df_after_22 = df[df['datetime'].dt.hour >= 22]
 
