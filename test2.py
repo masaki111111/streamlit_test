@@ -117,9 +117,9 @@ csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
+  
 except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+
     st.stop()
 
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
@@ -139,9 +139,9 @@ st.write(df.columns)
 #df_yd = pd.read_csv('data/CORE_data_yd.csv', sep = ';', header = 1,)
 try:
     df_yd = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
+ 
 except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+  
     st.stop()
 
 data_yd = pd.to_datetime(df_yd.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
@@ -154,7 +154,12 @@ new_datetime_yd = plot_data_yd['date_time_local'] + datetime.timedelta(days=1)
 
 # COREの一昨日のデータ
 #df_dby = pd.read_csv('data/CORE_data_dby.csv', sep = ';', header = 1)
-
+try:
+    df_dby = pd.read_csv(csv_file_path, sep = ';', header = 1,)
+    
+except Exception as e:
+    
+    st.stop()
 
 data_dby = pd.to_datetime(df_dby.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
