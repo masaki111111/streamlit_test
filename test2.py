@@ -36,8 +36,9 @@ params={
 
 }
 headers = { 
-  'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer  OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
 }
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response.text) #データを表示
@@ -57,8 +58,9 @@ params={
 }
 
 headers = { 
-  'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
 }
 response = requests.request('GET', url, headers=headers, params=params) 
 a1 =response.json()
@@ -72,8 +74,9 @@ params = {
     #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
-  'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
 }
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
