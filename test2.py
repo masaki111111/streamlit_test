@@ -324,7 +324,7 @@ except Exception as e:
     st.error("日時情報の変換に失敗しました。形式を確認してください。")
     st.stop()
 # 22時以降のデータをフィルタリング
-df_after_22 = df[df['datetime'].dt.hour >= 22]
+df_after_22 = df[(df['datetime'].dt.hour >= 22) | (df['datetime'].dt.hour < 4)]
 
 if df_after_22.empty:
     st.warning("22時以降のデータが見つかりません。")
