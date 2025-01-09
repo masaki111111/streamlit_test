@@ -125,6 +125,8 @@ except Exception as e:
 
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
+st.write(data)
+
 y = df.iloc[:,2]
 plot_data = pd.DataFrame(data)
 plot_data['Temp'] = y
