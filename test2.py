@@ -112,9 +112,9 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 #csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
 # = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
-csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
+#csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
-
+csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
@@ -228,18 +228,55 @@ st.plotly_chart(fig,use_container_width=True)
 
 
 
-# COREの30分前との変化率取得
-chang_rate = plot_data['Temp'].pct_change(30, axis=0)
-plot_data['diff30m'] = chang_rate
-plot_data['diff30m'][plot_data['diff30m']==np.NaN] = 0
-df_cr = pd.DataFrame(chang_rate)
-df_cr['date_time_local'] = data
+
 
 ss1 = '睡眠スコアは'
 ss2 = b
 ss3 = 'でした'
 st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
+# 小数点切り捨て
+n = 1
+m = duration_in_hrs / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
+new_duration_in_hrs = math.floor(m * 10 ** n) / (10 ** n)
+
+ss1 = '睡眠時間は'
+ss2 = new_duration_in_hrs
+ss3 = '時間でした'
+st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
+
+
+#レム睡眠
+# 小数点切り捨て
+n = 1
+m = rem_sleep_duration / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
+#new_rem_sleep_duration = math.floor(m * 10 ** n) / (10 ** n)
+new_rem_sleep_duration = round(m,2)
+
+
+sss1 = 'レム睡眠は'
+sss2 = new_rem_sleep_duration
+sss3 = '時間でした'
+st.markdown("{0}{1}{2}".format(sss1,sss2,sss3))
+
+#レム睡眠の割合
+new1_rem_sleep_duration = (new_rem_sleep_duration * 0.6) * 100
+
+min_duration_in_hrs = new_duration_in_hrs * 60
+
+rem_ratio = (new1_rem_sleep_duration / min_duration_in_hrs) * 100
+
+# 小数点切り捨て
+new_rem_ratio = math.floor(rem_ratio * 10 ** n) / (10 ** n) 
+s1 = 'レム睡眠の割合は'
+s2 = new_rem_ratio
+s3 = '％です'
+st.markdown("{0}{1}{2}".format(s1,s2,s3))
+
+st.write("レム睡眠は夢を見る事、記憶の統合、学習、創造性と関連しています")
+st.write("レム睡眠の量は睡眠時間全体の5~50%を占めています.成人の平均的なレム睡眠は1.5時間ですが、年齢とともに減少するのが一般的です")
+st.write()
+# 起床時刻と体温上がり初めの差異
 
 
 #---------------------------
@@ -263,7 +300,7 @@ if df_after_22.empty:
 else:
     # データの確認
     st.write("22時以降のデータが表示されます:")
-    st.dataframe(df_after_22)
+    #st.dataframe(df_after_22)
 
     # 6列目（皮膚温度）と3列目（深部体温）のデータを取得
     if len(df_after_22.columns) >= 6:
@@ -338,45 +375,3 @@ else:
 
 
 
-# 小数点切り捨て
-n = 1
-m = duration_in_hrs / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
-new_duration_in_hrs = math.floor(m * 10 ** n) / (10 ** n)
-
-ss1 = '睡眠時間は'
-ss2 = new_duration_in_hrs
-ss3 = '時間でした'
-st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
-
-
-#レム睡眠
-# 小数点切り捨て
-n = 1
-m = rem_sleep_duration / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
-#new_rem_sleep_duration = math.floor(m * 10 ** n) / (10 ** n)
-new_rem_sleep_duration = round(m,2)
-
-
-sss1 = 'レム睡眠は'
-sss2 = new_rem_sleep_duration
-sss3 = '時間でした'
-st.markdown("{0}{1}{2}".format(sss1,sss2,sss3))
-
-#レム睡眠の割合
-new1_rem_sleep_duration = (new_rem_sleep_duration * 0.6) * 100
-
-min_duration_in_hrs = new_duration_in_hrs * 60
-
-rem_ratio = (new1_rem_sleep_duration / min_duration_in_hrs) * 100
-
-# 小数点切り捨て
-new_rem_ratio = math.floor(rem_ratio * 10 ** n) / (10 ** n) 
-s1 = 'レム睡眠の割合は'
-s2 = new_rem_ratio
-s3 = '％です'
-st.markdown("{0}{1}{2}".format(s1,s2,s3))
-
-st.write("レム睡眠は夢を見る事、記憶の統合、学習、創造性と関連しています")
-st.write("レム睡眠の量は睡眠時間全体の5~50%を占めています.成人の平均的なレム睡眠は1.5時間ですが、年齢とともに減少するのが一般的です")
-st.write()
-# 起床時刻と体温上がり初めの差異
