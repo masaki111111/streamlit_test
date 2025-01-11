@@ -58,14 +58,14 @@ time_input = st.time_input("基準となる時刻を選択してください")
 if isinstance(date_input, datetime.date) and isinstance(time_input, datetime.time):
     # 日付と時刻を結合
     user_datetime = datetime.combine(date_input, time_input)
-    st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
+    #st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
 else:
     st.error("日付または時刻の入力が正しくありません。")
 
-if user_input_time:
+if user_datetime:
     try:
         # 入力された日時をdatetime型に変換
-        input_time = datetime.strptime(user_input_time, '%d.%m.%Y %H:%M:%S')
+        input_time = datetime.strptime(user_datetime, '%d.%m.%Y %H:%M:%S')
 
         # データを日時順にソート
         df = df.sort_values('datetime')
