@@ -201,7 +201,7 @@ if x_choice == "昨日":
 if x_choice == "一昨日":
         fig.add_traces((f1,f2,f3))
 
-x_choice == "今日":
+
      
       
       
