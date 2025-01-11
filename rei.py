@@ -39,9 +39,11 @@ except Exception as e:
 
 # 使用者に基準となる日時を入力してもらう
 # 日時の入力 (日付と時間を分けて入力)
-st.date_input("基準となる日付を選択してください")
-st.time_input("基準となる時刻を選択してください")
+# 時刻の入力
+time_input = st.time_input("基準となる時刻を選択してください")
 
+# 入力内容を表示
+st.write(f"選択した時刻: {time_input}")
 date_input = st.date_input("基準となる日付を選択してください")
 time_input = st.time_input("基準となる時刻を選択してください")
 
