@@ -67,7 +67,7 @@ else:
             current_core_avg = core_temp.iloc[-10:].mean()
 
             # 平均値を表示
-            st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}")
+            st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}",f"30分前の平均皮膚温度: {past_skin_avg2:.2f}")
             st.write(f"30分前の平均皮膚温度: {past_skin_avg2:.2f}")
             st.write(f"現在の平均皮膚温度: {current_skin_avg:.2f}")
             st.write(f"1時間前のの平均深部体温: {past_core_avg1:.2f}")
