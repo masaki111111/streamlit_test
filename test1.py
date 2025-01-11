@@ -139,9 +139,9 @@ csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
+    #st.write("CSVファイルの読み込みに成功しました。")
 except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+    #st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
     st.stop()
 
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
