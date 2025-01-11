@@ -5,12 +5,12 @@ from datetime import datetime, timedelta
 # Streamlitアプリ
 st.title("日時を指定して平均の差を比較するプログラム")
 
-# CSVファイルのアップロード
-uploaded_file = st.file_uploader("CSVファイルをアップロードしてください", type=["csv"])
+
 
 if uploaded_file is not None:
     # CSVファイルを読み込む
-    df = pd.read_csv(uploaded_file)
+    df = "data/05_12_2024_DA38DDB3C43F_history.csv"
+
 
     # データの確認
     st.write("アップロードしたデータ:")
