@@ -57,11 +57,11 @@ else:
         # データが十分にあるか確認
         if len(skin_temp) >= 16 and len(core_temp) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
-            past_skin_avg = skin_temp.iloc[-40:-30].mean()
+            past_skin_avg = skin_temp.iloc[-70:-60].mean()
             current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
-            past_core_avg = core_temp.iloc[-40:-30].mean()
+            past_core_avg = core_temp.iloc[-70:-60].mean()
             current_core_avg = core_temp.iloc[-10:].mean()
 
             # 平均値を表示
@@ -76,8 +76,8 @@ else:
             # 皮膚温度が下がり始めたタイミングを検出
             for i in range(len(skin_temp) - 1, 5, -1):
                 # 10行の平均を更新
-                past_skin_avg = skin_temp.iloc[i-10:i-6].mean()
-                current_skin_avg = skin_temp.iloc[i-6:i].mean()
+                past_skin_avg = skin_temp.iloc[i-700:i-60].mean()
+                current_skin_avg = skin_temp.iloc[i-10:i].mean()
 
                 if current_skin_avg < past_skin_avg:
                     # 下がり始めたタイミングの行を表示
