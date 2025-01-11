@@ -70,9 +70,16 @@ else:
             st.write(f"現在6行の平均深部体温: {current_core_avg:.2f}")
 
             # 皮膚温度が下がり始めたタイミングを検出
-            if current_skin_avg < past_skin_avg:
-                st.warning("皮膚温度が下がり始めた可能性があります。")
+            for i in range(len(skin_temp) - 1, 5, -1):
+                # 10行の平均を更新
+                past_skin_avg = skin_temp.iloc[i-10:i-6].mean()
+                current_skin_avg = skin_temp.iloc[i-6:i].mean()
 
+                if current_skin_avg < past_skin_avg:
+                    # 下がり始めたタイミングの行を表示
+                    st.warning(f"皮膚温度が下がり始めたタイミングの行: {i+1}, 時刻: {df_after_22.iloc[i]['datetime']}")
+                    break  # 最初に下がり始めたタイミングで終了
+                    
             # 条件を判定
             if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
                 st.success("条件を満たしました: 皮膚温度は上昇し、深部体温は下降しています。")
