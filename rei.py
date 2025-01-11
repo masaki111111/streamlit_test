@@ -48,8 +48,6 @@ st.write('終了日は：', result[1])
 
 
 
-# サンプルデータフレーム
-dff = pd.DataFrame({"Time": [1, 2, 3, 4]})
 
 # ユーザー入力
 start_date = st.date_input('Enter start date', value=datetime.date.today())
@@ -59,24 +57,15 @@ start_time = st.time_input('Enter start time', value=datetime.datetime.now().tim
 try:
     start_datetime = datetime.datetime.combine(start_date, start_time)
 
-    # 新しい列を作成
-    dff["DateTime"] = [start_datetime + datetime.timedelta(seconds=time) for time in df["Time"]]
-
-    # フォーマットを変更
-    dff["DateTime"] = pd.to_datetime(df["DateTime"]).dt.strftime("%d/%m/%Y %H:%M:%S")
-
-    # 不要列を削除
-    dff = dff.drop(columns=["Time"])
-
     # 結果を表示
-    st.dataframe(dff)
+    st.dataframe(start_datetime)
 except Exception as e:
     st.error(f"エラーが発生しました: {e}")
 
-if dff:
+if start_datetime:
     try:
         # 入力された日時をdatetime型に変換
-        input_time = datetime.strptime(dff, '%d.%m.%Y %H:%M:%S')#user_datetime
+        input_time = datetime.strptime(start_datetime, '%d.%m.%Y %H:%M:%S')#user_datetime
 
         # データを日時順にソート
         df = df.sort_values('datetime')
