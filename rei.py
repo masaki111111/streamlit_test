@@ -68,4 +68,3 @@ if uploaded_file is not None:
 
         except Exception as e:
             st.error("日時の入力形式が正しくありません。例: 05.12.2024 22:30:00")
-
