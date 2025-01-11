@@ -56,12 +56,12 @@ else:
         # データが十分にあるか確認
         if len(skin_temp) >= 16 and len(core_temp) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
-            past_skin_avg = skin_temp.iloc[-16:-10].mean()
-            current_skin_avg = skin_temp.iloc[-6:].mean()
+            past_skin_avg = skin_temp.iloc[-40:-30].mean()
+            current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
-            past_core_avg = core_temp.iloc[-16:-10].mean()
-            current_core_avg = core_temp.iloc[-6:].mean()
+            past_core_avg = core_temp.iloc[-40:-30].mean()
+            current_core_avg = core_temp.iloc[-10:].mean()
 
             # 平均値を表示
             st.write(f"過去10行（6行前まで）の平均皮膚温度: {past_skin_avg:.2f}")
