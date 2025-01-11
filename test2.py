@@ -143,7 +143,7 @@ except Exception as e:
 df_after_22 = df[(df['datetime'].dt.hour >= 22) | (df['datetime'].dt.hour < 4)]
 
 if df_after_22.empty:
-    st.warning("22時以降のデータが見つかりません。")
+    st.stop()
 else:
     # データの確認
     st.write("22時以降のデータが表示されます:")
@@ -219,7 +219,7 @@ else:
 
 
 
-
+#-----------------------------------core データ----------------------------------------------------
 
 
 y = df.iloc[:,2]
@@ -294,7 +294,9 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 
 
 #----------------------------------Core,ouraプロット--------------------------------------------
-      
+
+
+
 fig = go.Figure()
 fig.add_traces(f1)
 f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
@@ -327,7 +329,8 @@ line=dict(color="Red", width=3)
 ))                                                                                                  
 st.plotly_chart(fig,use_container_width=True) 
 
-
+st.subheader('今日の概日リズム')                                                
+st.plotly_chart(fig,use_container_width=True) 
 #----------------------------------睡眠データ表示--------------------------------------------
 
 
