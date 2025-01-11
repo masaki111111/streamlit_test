@@ -81,33 +81,34 @@ else:
                 st.write("入眠に適しているといえる状態です")
         if past_skin_avg1 > current_skin_avg:
             st.write("皮膚温度が上がっていません")
-            import streamlit as st
+           
+
+# 音声を再生するJavaScriptコード
+def play_sound():
+    sound_script = """
+    <script>
+    // 音声の再生
+    var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+    audio.loop = true;  // 音声をループ再生
+    audio.play();
+    
+    // 5秒後に停止
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // 再生位置をリセット
+    }, 5000);
+    </script>
+    """
+    st.markdown(sound_script, unsafe_allow_html=True)
+
+# ボタンをクリックしたらアラームを鳴らす
+if st.button("アラームを鳴らす"):
+    st.write("アラームが鳴っています...")
+    play_sound()
 
 
-# 音声再生のためのJavaScript
-        def play_sound():
-            sound_script = """
-            <script>
-            var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
-              audio.play();
-            </script>
-            """
-            st.markdown(sound_script, unsafe_allow_html=True)
 
-# アラームの設定
-        alarm_time = st.text_input("アラームの時間を入力してください (HH:MM:SS)", "15:30:00")
-        current_time_placeholder = st.empty()
-
-        while True:
-            current_time = datetime.now().strftime("%H:%M:%S")
-            current_time_placeholder.text(f"現在の時刻: {current_time}")
-
-            if current_time == alarm_time:
-                st.warning("アラーム時間です！")
-                play_sound()
-                break
-
-            time.sleep(1)  # 1秒間隔で更新
+        
 
                 
             
