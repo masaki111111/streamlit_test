@@ -10,9 +10,6 @@ st.title("日時を指定して平均の差を比較するプログラム")
 df = "data/05_12_2024_DA38DDB3C43F_history.csv"
 
 
-# データの確認
-st.write("アップロードしたデータ:")
-st.dataframe(df.head())
 
 # 日時情報のカラムをdatetime型に変換
 try:
