@@ -46,15 +46,22 @@ result = st.slider('調査期間を指定してください。', value=(min_date
 st.write('開始日は：', result[0])
 st.write('終了日は：', result[1])
 
-# 日時の入力 (日付と時間を分けて入力)
+
+# タイトル
+st.title("日時選択アプリ")
+
+# 日付と時刻の入力
 date_input = st.date_input("基準となる日付を選択してください")
 time_input = st.time_input("基準となる時刻を選択してください")
 
-# 入力を結合して基準日時を作成
-if date_input and time_input:
-    user_input_time = datetime.combine(date_input, time_input)
-    st.write(f"基準日時: {user_input_time.strftime('%d.%m.%Y %H:%M:%S')}")
-    
+# 型の確認と結合
+if isinstance(date_input, datetime.date) and isinstance(time_input, datetime.time):
+    # 日付と時刻を結合
+    user_datetime = datetime.combine(date_input, time_input)
+    st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
+else:
+    st.error("日付または時刻の入力が正しくありません。")
+
 if user_input_time:
     try:
         # 入力された日時をdatetime型に変換
