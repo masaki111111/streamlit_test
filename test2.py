@@ -197,10 +197,16 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 
 
 
-     
-      
-      
 
+#----------------------------------Core,ouraプロット--------------------------------------------
+      
+fig = go.Figure()
+fig.add_traces((f1,f2))
+f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
+                         y=plot_data_yd['Temp'],
+                         mode='lines',
+                         name='昨日の深部体温'
+                        )
 #変数に今日のスコアを代入
 b = (a2["data"][0]["score"])
 #レム睡眠の長さ
@@ -214,20 +220,20 @@ fig.add_trace(go.Scatter(
 x=[date_start0, date_start0],
 y=[36, 40],
 mode='lines+markers',
-name='lines+markers',
+name='入眠時間',
 line=dict(color="Red", width=3)
 ))
 fig.add_trace(go.Scatter(
 x=[date_end0, date_end0],
 y=[36, 40],
 mode='lines+markers',
-name='lines+markers',
+name='起床時間',
 line=dict(color="Red", width=3)
 ))                                                                                                  
 st.plotly_chart(fig,use_container_width=True) 
 
 
-
+#----------------------------------睡眠データ表示--------------------------------------------
 
 
 ss1 = '睡眠スコアは'
@@ -244,6 +250,8 @@ ss1 = '睡眠時間は'
 ss2 = new_duration_in_hrs
 ss3 = '時間でした'
 st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
+
+
 
 
 #レム睡眠
