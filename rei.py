@@ -72,12 +72,20 @@ else:
             
             # 平均値を表示
             st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}",f"。30分前の平均皮膚温度: {past_skin_avg2:.2f}",f"。現在の平均皮膚温度: {current_skin_avg:.2f}")
-            st.write(f"1時間前と現在の皮膚温の差: {skinsub:.2f}")
-            st.write("")
-            
             st.write(f"1時間前の平均深部体温: {past_core_avg1:.2f}",f"。30前の平均深部体温: {past_core_avg2:.2f}",f"。現在の平均深部体温: {current_core_avg:.2f}")
-            st.write(f"1時間前と現在の皮膚温の差: {coresub:.2f}")
-            st.write("")            
+            st.write("")
+        if past_skin_avg1 < current_skin_avg:
+            if past_core_avg1 < current_core_avg:
+                st.write("皮膚温度が上がり始めていますが深部体温が下がっていません")
+            if past_core_avg1 > current_core_avg:
+                st.write("入眠に適しているといえる状態です")
+        if past_skin_avg1 > current_skin_avg:
+            st.write("皮膚温度が上がっていません")
+                
+            
+            #st.write(f"1時間前と現在の皮膚温の差: {skinsub:.2f}")       
+            #st.write(f"1時間前と現在の皮膚温の差: {coresub:.2f}")
+                     
             
 
 
