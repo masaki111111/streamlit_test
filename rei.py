@@ -21,7 +21,14 @@ st.title("日時を指定して平均の差を比較するプログラム")
 
 df = "data/05_12_2024_DA38DDB3C43F_history.csv"
 
+try:
+    df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
+  
+except Exception as e:
 
+    st.stop()
+
+data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
 # 日時情報のカラムをdatetime型に変換
 try:
