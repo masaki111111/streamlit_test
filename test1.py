@@ -15,6 +15,8 @@ import matplotlib.pyplot as plt
 import datetime
 import pytz
 
+
+#---------------------------oura API　設定----------------------------
 # 日本のタイムゾーンを設定
 japan_tz = pytz.timezone('Asia/Tokyo')
 
@@ -90,6 +92,9 @@ response = requests.get(url, headers=headers, params=params)
 a0 = response.json()
 #st.write(a0)#これでJsonデータが整列される
 
+#---------------------------oura　時間設定----------------------------
+
+
 #変数に就寝と起床の時間を代入
 date1 = (a0["data"][0]["bedtime_start"])
 date2 = (a0["data"][0]["bedtime_end"])
@@ -127,7 +132,7 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
 
-#----COREのデータ取得----
+#---------------------------COREデータ取得----------------------------
 #df = pd.read_csv('data/CORE_data.csv', sep = ';', header = 1,)
 # CSVファイルのパスを指定
 #csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
@@ -191,7 +196,7 @@ plot_data_dby['Temp'] = y_dby
 new_datetime_dby = plot_data_dby['date_time_local'] + datetime.timedelta(days=2)
 
 
-# CORE,Ouraプロット
+#---------------------------Core Ouraのプロット----------------------------
 fig = go.Figure()
 f1 = go.Scatter(x=plot_data['date_time_local'],
                          y=plot_data['Temp'],
@@ -321,12 +326,7 @@ if x_choice == "一昨日":
       st.subheader('今日の概日リズム')                                                
       st.plotly_chart(fig,use_container_width=True) 
 
-# COREの30分前との変化率取得
-chang_rate = plot_data['Temp'].pct_change(30, axis=0)
-plot_data['diff30m'] = chang_rate
-plot_data['diff30m'][plot_data['diff30m']==np.NaN] = 0
-df_cr = pd.DataFrame(chang_rate)
-df_cr['date_time_local'] = data
+#---------------------------睡眠諸データ表示----------------------------
 
 ss1 = '今回の睡眠スコアは'
 ss2 = b
@@ -379,7 +379,7 @@ st.write("レム睡眠の量は睡眠時間全体の5~50%を占めています.�
 st.write()
 # 起床時刻と体温上がり初めの差異
 
-#---------------------------
+#---------------------------深部体温,皮膚温の入眠に適したタイミング表示----------------------------
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 # CSVファイル読み込み（例）
 # df = pd.read_csv('data.csv')
@@ -398,6 +398,7 @@ if df_after_22.empty:
     st.warning("22時以降のデータが見つかりません。")
 else:
     # データの確認
+    st.write("")
     st.write("22時以降のデータが表示されます:")
     #st.dataframe(df_after_22)
 
