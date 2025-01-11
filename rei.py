@@ -57,22 +57,26 @@ else:
         # データが十分にあるか確認
         if len(skin_temp) >= 16 and len(core_temp) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
-            past_skin_avg = skin_temp.iloc[-70:-60].mean()
+            past_skin_avg1 = skin_temp.iloc[-70:-60].mean()
+            past_skin_avg2 = skin_temp.iloc[-40:-30].mean()
             current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
             past_core_avg = core_temp.iloc[-70:-60].mean()
+            past_core_avg = core_temp.iloc[-40:-30].mean()
             current_core_avg = core_temp.iloc[-10:].mean()
 
             # 平均値を表示
-            st.write(f"30分前の平均皮膚温度: {past_skin_avg:.2f}")
+            st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}")
+            st.write(f"30分前の平均皮膚温度: {past_skin_avg2:.2f}")
             st.write(f"現在の平均皮膚温度: {current_skin_avg:.2f}")
-            st.write(f"30分前のの平均深部体温: {past_core_avg:.2f}")
+            st.write(f"1時間前のの平均深部体温: {past_core_avg1:.2f}")
+            st.write(f"30前のの平均深部体温: {past_core_avg2:.2f}")
             st.write(f"現在の平均深部体温: {current_core_avg:.2f}")
 
-            st.caption("皮膚温が上がって深部体温が下がっている場合寝るのに良いタイミングです")
+            st.caption("皮膚温が上がって深部体温が下がっている場合眠るのに良いタイミングです")
             st.caption("眠り始めの90分で、いかに深く、質の良い睡眠がとれるかで睡眠全体の質が変わります睡眠に影響を及ぼす体の温度には2種類あり、体の内部を指す「深部体温」は、睡眠中に下がり臓器や筋肉、脳などを休ませます。")
-            st.caption("もう1つは「手足の皮膚温度」です。目が覚めている時は通常、深部体温のほうが皮膚温度よりも2℃ほど高いです。そして、入眠前には皮膚温度が上昇し、手足がポカポカすることで放熱を行い、深部体温を下げ、皮膚温度と深部体温の差が2℃以下に縮まることで、黄金の90分が生まれます。")
+            st.caption("もう1つは「皮膚温度」です。目が覚めている時は通常、深部体温のほうが皮膚温度よりも2℃ほど高いです。そして、入眠前には皮膚温度が上昇し、手足がポカポカすることで放熱を行い、深部体温を下げ、皮膚温度と深部体温の差が2℃以下に縮まることで、黄金の90分が生まれます。")
             # 皮膚温度が下がり始めたタイミングを検出
             for i in range(len(skin_temp) - 1, 5, -1):
                 # 10行の平均を更新
