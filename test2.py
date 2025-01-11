@@ -192,7 +192,7 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
                         )
 
 # 表示グラフ選択
-x_choice = st.radio("日付を選んでください", ("今日", "昨日", "一昨日"), horizontal=True)
+
 
 if x_choice == "今日":
         fig.add_traces((f1))
@@ -201,106 +201,37 @@ if x_choice == "昨日":
 if x_choice == "一昨日":
         fig.add_traces((f1,f2,f3))
 
-if x_choice == "今日":
+x_choice == "今日":
      
       
       
 
-      #変数に今日のスコアを代入
-      b = (a2["data"][0]["score"])
-      #レム睡眠の長さ
-      rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
+#変数に今日のスコアを代入
+b = (a2["data"][0]["score"])
+#レム睡眠の長さ
+rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
-      #今日の睡眠時間
-      duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#今日の睡眠時間
+duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
-      # データトレースを追加
-      fig.add_trace(go.Scatter(
-       x=[date_start0, date_start0],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Red", width=3)
-      ))
-      fig.add_trace(go.Scatter(
-       x=[date_end0, date_end0],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Red", width=3)
-      ))                                                                                                  
-      st.plotly_chart(fig,use_container_width=True) 
-
-
-if x_choice == "昨日":
-      fig = go.Figure()
-      fig.add_traces((f1,f2))
-      f2 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
-                         y=plot_data_yd['Temp'],
-                         mode='lines',
-                         name='昨日の深部体温'
-                        )
+# データトレースを追加
+fig.add_trace(go.Scatter(
+x=[date_start0, date_start0],
+y=[36, 40],
+mode='lines+markers',
+name='lines+markers',
+line=dict(color="Red", width=3)
+))
+fig.add_trace(go.Scatter(
+x=[date_end0, date_end0],
+y=[36, 40],
+mode='lines+markers',
+name='lines+markers',
+line=dict(color="Red", width=3)
+))                                                                                                  
+st.plotly_chart(fig,use_container_width=True) 
 
 
-      #変数に昨日のスコアを代入
-      b = (a2["data"][1]["score"])
-      #レム睡眠の長さ
-      rem_sleep_duration = (a0["data"][1]["rem_sleep_duration"])
-
-      #昨日の睡眠時間
-      duration_in_hrs = (a0["data"][1]["total_sleep_duration"])#変数に2日目の睡眠時間を代入
-
-       # データトレースを追加
-      fig.add_trace(go.Scatter(
-       x=[date_start1, date_start1],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Blue", width=3)
-      ))
-      fig.add_trace(go.Scatter(
-       x=[date_end1, date_end1],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Blue", width=3)
-      ))                                            
-      st.plotly_chart(fig,use_container_width=True) 
-
-if x_choice == "一昨日":
-      fig = go.Figure()
-      fig.add_traces((f1,f2,f3))
-      f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
-                         y=plot_data_dby['Temp'],
-                         mode='lines',
-                         name='一昨日のの深部体温'
-                        )
-
-      #変数に一昨日のスコアを代入
-      b = (a2["data"][2]["score"])
-      #レム睡眠の長さ
-      rem_sleep_duration = (a0["data"][2]["rem_sleep_duration"])
-
-      #一昨日の睡眠時間
-      duration_in_hrs = (a0["data"][2]["total_sleep_duration"])#変数に3日目の睡眠時間を代入
-
-      # データトレースを追加
-      fig.add_trace(go.Scatter(
-       x=[date_start2, date_start2],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Green", width=3)
-      ))
-      fig.add_trace(go.Scatter(
-       x=[date_end2, date_end2],
-       y=[36, 40],
-       mode='lines+markers',
-       name='lines+markers',
-       line=dict(color="Green", width=3)
-      ))
-      st.subheader('今日の概日リズム')                                                
-      st.plotly_chart(fig,use_container_width=True) 
 
 # COREの30分前との変化率取得
 chang_rate = plot_data['Temp'].pct_change(30, axis=0)
@@ -318,19 +249,25 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 #---------------------------
 
+data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
+# CSVファイル読み込み（例）
+# df = pd.read_csv('data.csv')
+
+# 日時の変換
 try:
     df['datetime'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
 except Exception as e:
     st.error("日時情報の変換に失敗しました。形式を確認してください。")
     st.stop()
-# 22時以降のデータをフィルタリング
+
+# 22時以降のデータをフィルタリング（22時～翌日4時の範囲）
 df_after_22 = df[(df['datetime'].dt.hour >= 22) | (df['datetime'].dt.hour < 4)]
 
 if df_after_22.empty:
     st.warning("22時以降のデータが見つかりません。")
 else:
     # データの確認
-    st.write("22時以降のデータ:")
+    st.write("22時以降のデータが表示されます:")
     st.dataframe(df_after_22)
 
     # 6列目（皮膚温度）と3列目（深部体温）のデータを取得
@@ -341,59 +278,70 @@ else:
         # データが十分にあるか確認
         if len(skin_temp) >= 16 and len(core_temp) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
-            past_skin_avg = skin_temp.iloc[-16:-10].mean()
-            current_skin_avg = skin_temp.iloc[-6:].mean()
+            past_skin_avg1 = skin_temp.iloc[-70:-60].mean()
+            past_skin_avg2 = skin_temp.iloc[-40:-30].mean()
+            current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
-            past_core_avg = core_temp.iloc[-16:-10].mean()
-            current_core_avg = core_temp.iloc[-6:].mean()
+            past_core_avg1 = core_temp.iloc[-70:-60].mean()
+            past_core_avg2 = core_temp.iloc[-40:-30].mean()
+            current_core_avg = core_temp.iloc[-10:].mean()
 
+            skinsub = past_skin_avg1 - current_skin_avg
+
+            coresub = past_core_avg1 - current_core_avg
+            
             # 平均値を表示
-            st.write(f"過去10行（6行前まで）の平均皮膚温度: {past_skin_avg:.2f}")
-            st.write(f"現在6行の平均皮膚温度: {current_skin_avg:.2f}")
-            st.write(f"過去10行（6行前まで）の平均深部体温: {past_core_avg:.2f}")
-            st.write(f"現在6行の平均深部体温: {current_core_avg:.2f}")
+            st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}",f"。30分前の平均皮膚温度: {past_skin_avg2:.2f}",f"。現在の平均皮膚温度: {current_skin_avg:.2f}")
+            st.write(f"1時間前の平均深部体温: {past_core_avg1:.2f}",f"。30前の平均深部体温: {past_core_avg2:.2f}",f"。現在の平均深部体温: {current_core_avg:.2f}")
+            st.write("")
+        if past_skin_avg1 < current_skin_avg:
+            if past_core_avg1 < current_core_avg:
+                st.write("皮膚温度が上がり始めていますが深部体温が下がっていません")
+            if past_core_avg1 > current_core_avg:
+                st.write("入眠に適しているといえる状態です")
+        if past_skin_avg1 > current_skin_avg:
+            st.write("皮膚温度が上がっていません")
+                
+            
+            #st.write(f"1時間前と現在の皮膚温の差: {skinsub:.2f}")       
+            #st.write(f"1時間前と現在の皮膚温の差: {coresub:.2f}")
+                     
+            
 
-            # 条件を判定
-            if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
-                st.success("条件を満たしました: 皮膚温度は上昇し、深部体温は下降しています。")
+
+            st.caption("皮膚温が上がって深部体温が下がっている場合眠るのに良いタイミングです")
+            st.caption("眠り始めの90分で、いかに深く、質の良い睡眠がとれるかで睡眠全体の質が変わります睡眠に影響を及ぼす体の温度には2種類あり、体の内部を指す「深部体温」は、睡眠中に下がり臓器や筋肉、脳などを休ませます。")
+            st.caption("もう1つは「皮膚温度」です。目が覚めている時は通常、深部体温のほうが皮膚温度よりも2℃ほど高いです。そして、入眠前には皮膚温度が上昇し、手足がポカポカすることで放熱を行い、深部体温を下げ、皮膚温度と深部体温の差が2℃以下に縮まることで、黄金の90分が生まれます。")
+            # 皮膚温度が下がり始めたタイミングを検出
+        if len(skin_temp) >= 16 and len(core_temp) >= 16:
+            # 皮膚温度と深部体温の変化を検出
+            for i in range(len(skin_temp) - 1, 9, -1):
+                # 10行の平均を更新
+                past_skin_avg = skin_temp.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                current_skin_avg = skin_temp.iloc[i-10:i].mean()  # 現在10行
+                past_core_avg = core_temp.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                current_core_avg = core_temp.iloc[i-10:i].mean()  # 現在10行
+
+                # 皮膚温度が上昇し、深部体温が下降しているか判定
+                if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
+                    # 皮膚温度が上がり、深部体温が下がり始めたタイミングの行を表示
+                    st.warning(f"皮膚温度が上昇し、深部体温が下降している時刻: {df_after_22.iloc[i]['datetime']}")
+                    break  # 最初に条件を満たしたタイミングで終了
+
             else:
-                st.info("条件を満たしていません。")
+                st.info("皮膚温度が上昇し、深部体温が下降しているタイミングは見つかりませんでした。")
+
+            
         else:
             st.warning("22時以降のデータが16行以上必要です。")
     else:
         st.error("CSVファイルに少なくとも6列のデータが必要です。")
+
+
 #---------------------------
 
-# DataFrame Get up Change Rate
-df_gucr = df_cr.query('Temp > 0.003')
-subset_df = df_gucr[df_gucr['date_time_local'] > date_start0 + datetime.timedelta(minutes=30)]
-df_getup = subset_df.iloc[1,1]
 
-# DataFrame Fall Asleep Change Rate
-df_facr = df_cr.query('Temp < -0.0045')
-facr_df = df_facr[df_facr['date_time_local'] > date_start0]
-df_fall_asleep = facr_df.iloc[1,1]
-
-# 起床時刻と体温上がり初めの差異
-rhythm_delay = df_getup.strftime('%H時%M分%S秒')
-a = 'あなたの眠ってから体温が上がり始めた時刻は'
-b = 'です'
-c = rhythm_delay
-st.markdown("{0}{1}{2}".format(a,c,b))
-st.caption("深部体温は正常なリズムの場合，入眠と共に低下し，眠っている間は低い状態がキープされ，目覚めに向けて再度上昇していきます．")
-st.caption("深部体温が上昇することで体が活動できるように変化していきます．起床するとさらに深部体温が上昇します．深部体温が上昇し始めるよりも先に起床してしまうのは良い目覚めとは言えません．")
-
-
-# 就寝時刻と体温下がり始めの差異
-rhythm_delay_fa = df_fall_asleep - date_start0
-a = 'あなたの眠ってから体温が下がり始めるまでの時間は'
-b = 'です'
-c = rhythm_delay_fa
-st.markdown("{0}{1}{2}".format(a,c,b))
-st.caption("正常なリズムの場合，入眠と共に深部体温は低下していきます．低下しない場合，良い睡眠は得られません．体温の最高値と最低値の差は健康な場合1°C程度です．")
-
-#-------------------------------
 
 # 小数点切り捨て
 n = 1
