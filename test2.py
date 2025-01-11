@@ -201,7 +201,7 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 #----------------------------------Core,ouraプロット--------------------------------------------
       
 fig = go.Figure()
-fig.add_traces((f1)
+fig.add_traces(f1)
 f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
                          y=plot_data_yd['Temp'],
                          mode='lines',
