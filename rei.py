@@ -18,6 +18,29 @@ import streamlit as st
 import pandas as pd
 import datetime
 
+# 音声を再生するJavaScriptコード
+def play_sound():
+    sound_script = """
+    <script>
+    // 音声の再生
+    var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+    audio.loop = true;  // 音声をループ再生
+    audio.play();
+    
+    // 5秒後に停止
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0; // 再生位置をリセット
+    }, 5000);
+    </script>
+    """
+    st.markdown(sound_script, unsafe_allow_html=True)
+
+# ボタンをクリックしたらアラームを鳴らす
+if st.button("アラームを鳴らす"):
+    st.write("アラームが鳴っています...")
+    play_sound()
+
 #csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
 csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
@@ -83,28 +106,7 @@ else:
             st.write("皮膚温度が上がっていません")
            
 
-# 音声を再生するJavaScriptコード
-def play_sound():
-    sound_script = """
-    <script>
-    // 音声の再生
-    var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
-    audio.loop = true;  // 音声をループ再生
-    audio.play();
-    
-    // 5秒後に停止
-    setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0; // 再生位置をリセット
-    }, 5000);
-    </script>
-    """
-    st.markdown(sound_script, unsafe_allow_html=True)
 
-# ボタンをクリックしたらアラームを鳴らす
-if st.button("アラームを鳴らす"):
-    st.write("アラームが鳴っています...")
-    play_sound()
 
 
 
