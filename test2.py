@@ -327,7 +327,6 @@ mode='lines+markers',
 name='起床時間',
 line=dict(color="Red", width=3)
 ))                                                                                                  
-st.plotly_chart(fig,use_container_width=True) 
 
 st.subheader('今日の概日リズム')                                                
 st.plotly_chart(fig,use_container_width=True) 
