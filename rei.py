@@ -13,7 +13,7 @@ df = "data/05_12_2024_DA38DDB3C43F_history.csv"
 
 # 日時情報のカラムをdatetime型に変換
 try:
-    df['datetime'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
+    df['date_time_local'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
 except Exception as e:
     st.error("日時情報の変換に失敗しました。形式を確認してください。")
     st.stop()
