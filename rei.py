@@ -105,7 +105,7 @@ else:
                 # 皮膚温度が上昇し、深部体温が下降しているか判定
                 if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
                     # 皮膚温度が上がり、深部体温が下がり始めたタイミングの行を表示
-                    st.warning(f"皮膚温度が上昇し、深部体温が下降しているタイミングの行: {i+1}, 時刻: {df_after_22.iloc[i]['datetime']}")
+                    st.warning(f"皮膚温度が上昇し、深部体温が下降している時刻: {df_after_22.iloc[i]['datetime']}")
                     break  # 最初に条件を満たしたタイミングで終了
 
             else:
