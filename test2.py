@@ -194,12 +194,7 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 # 表示グラフ選択
 
 
-if x_choice == "今日":
-        fig.add_traces((f1))
-if x_choice == "昨日":
-        fig.add_traces((f1,f2))
-if x_choice == "一昨日":
-        fig.add_traces((f1,f2,f3))
+
 
 
      
