@@ -67,12 +67,10 @@ else:
             current_core_avg = core_temp.iloc[-10:].mean()
 
             # 平均値を表示
-            st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}",f"30分前の平均皮膚温度: {past_skin_avg2:.2f}")
-            st.write(f"30分前の平均皮膚温度: {past_skin_avg2:.2f}")
-            st.write(f"現在の平均皮膚温度: {current_skin_avg:.2f}")
-            st.write(f"1時間前のの平均深部体温: {past_core_avg1:.2f}")
-            st.write(f"30前の平均深部体温: {past_core_avg2:.2f}")
-            st.write(f"現在の平均深部体温: {current_core_avg:.2f}")
+            st.write(f"「1時間前の平均皮膚温度」: {past_skin_avg1:.2f}",f"「30分前の平均皮膚温度」: {past_skin_avg2:.2f}",f"「現在の平均皮膚温度」: {current_skin_avg:.2f}")
+
+            st.write(f"「1時間前の平均深部体温」: {past_core_avg1:.2f}",f"「30前の平均深部体温」: {past_core_avg2:.2f}",f"「現在の平均深部体温」: {current_core_avg:.2f}")
+
 
             st.caption("皮膚温が上がって深部体温が下がっている場合眠るのに良いタイミングです")
             st.caption("眠り始めの90分で、いかに深く、質の良い睡眠がとれるかで睡眠全体の質が変わります睡眠に影響を及ぼす体の温度には2種類あり、体の内部を指す「深部体温」は、睡眠中に下がり臓器や筋肉、脳などを休ませます。")
