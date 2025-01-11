@@ -46,15 +46,7 @@ result = st.slider('調査期間を指定してください。', value=(min_date
 st.write('開始日は：', result[0])
 st.write('終了日は：', result[1])
 
-# 入力内容を表示
-st.write(f"選択した時刻: {time_input}")
-date_input = st.date_input("基準となる日付を選択してください")
-time_input = st.time_input("基準となる時刻を選択してください")
-
-# 入力を結合して基準日時を作成
-if date_input and time_input:
-    user_input_time = datetime.combine(date_input, time_input)
-    st.write(f"基準日時: {user_input_time.strftime('%d.%m.%Y %H:%M:%S')}")
+user_input_time = st.text_input("基準となる日時を入力してください（例: 05.12.2024 22:30:00）")
 
 if user_input_time:
     try:
