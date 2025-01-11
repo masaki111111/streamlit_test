@@ -46,21 +46,7 @@ result = st.slider('調査期間を指定してください。', value=(min_date
 st.write('開始日は：', result[0])
 st.write('終了日は：', result[1])
 
-
-
-
-# ユーザー入力
-start_date = st.date_input('Enter start date', value=datetime.date.today())
-start_time = st.time_input('Enter start time', value=datetime.datetime.now().time())
-
-# 入力値から開始日時を計算
-try:
-    start_datetime = datetime.datetime.combine(start_date, start_time)
-
-    # 結果を表示
-    st.dataframe(start_datetime)
-except Exception as e:
-    st.error(f"エラーが発生しました: {e}")
+start_datetime = st.text_input("基準となる日時を入力してください（例: 05.12.2024 22:30:00）")
 
 if start_datetime:
     try:
