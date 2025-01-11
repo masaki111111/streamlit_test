@@ -107,6 +107,25 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
+#----------------------------------Coreのデータ取得--------------------------------------------
+
+#df = pd.read_csv('data/CORE_data.csv', sep = ';', header = 1,)
+# CSVファイルのパスを指定
+#csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
+#csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
+# = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
+#csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
+#csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
+csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
+
+try:
+    df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
+  
+except Exception as e:
+
+    st.stop()
+
+data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 #----------------------------------深部体温,皮膚温の睡眠の適したタイミング表示--------------------------------------------
 
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
@@ -199,24 +218,7 @@ else:
         st.error("CSVファイルに少なくとも6列のデータが必要です。")
 
 
-#----COREのデータ取得----
-#df = pd.read_csv('data/CORE_data.csv', sep = ';', header = 1,)
-# CSVファイルのパスを指定
-#csv_file_path = r"C:\Users\owner\OneDrive - 大阪工業大学\ウエルネス研究室\福田勝基\Core\22_08_2024_DA38DDB3C43F_history.csv"
-#csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
-# = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
-#csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
-#csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
-csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
-try:
-    df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-  
-except Exception as e:
-
-    st.stop()
-
-data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
 
 
