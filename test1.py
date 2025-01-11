@@ -150,20 +150,20 @@ y = df.iloc[:,2]
 plot_data = pd.DataFrame(data)
 plot_data['Temp'] = y
 
-st.write("取得したデータ")
-st.write(plot_data)
-st.write(plot_data['Temp'])
+#st.write("取得したデータ")
+#st.write(plot_data)
+#st.write(plot_data['Temp'])
 
-st.write("データフレームの列名:")
-st.write(df.columns)
+#st.write("データフレームの列名:")
+#st.write(df.columns)
 
 # COREの前日データ取得
 #df_yd = pd.read_csv('data/CORE_data_yd.csv', sep = ';', header = 1,)
 try:
     df_yd = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
+    #st.write("CSVファイルの読み込みに成功しました。")
 except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+    #st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
     st.stop()
 
 data_yd = pd.to_datetime(df_yd.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
@@ -335,6 +335,50 @@ st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
 
 
 
+
+# 小数点切り捨て
+n = 1
+m = duration_in_hrs / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
+new_duration_in_hrs = math.floor(m * 10 ** n) / (10 ** n)
+
+ss1 = '今日の睡眠時間は'
+ss2 = new_duration_in_hrs
+ss3 = '時間でした'
+st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
+
+
+#レム睡眠
+# 小数点切り捨て
+n = 1
+m = rem_sleep_duration / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
+#new_rem_sleep_duration = math.floor(m * 10 ** n) / (10 ** n)
+new_rem_sleep_duration = round(m,2)
+
+
+sss1 = 'レム睡眠は'
+sss2 = new_rem_sleep_duration
+sss3 = '時間でした'
+st.markdown("{0}{1}{2}".format(sss1,sss2,sss3))
+
+#レム睡眠の割合
+new1_rem_sleep_duration = (new_rem_sleep_duration * 0.6) * 100
+
+min_duration_in_hrs = new_duration_in_hrs * 60
+
+rem_ratio = (new1_rem_sleep_duration / min_duration_in_hrs) * 100
+
+# 小数点切り捨て
+new_rem_ratio = math.floor(rem_ratio * 10 ** n) / (10 ** n) 
+s1 = 'レム睡眠の割合は'
+s2 = new_rem_ratio
+s3 = '％です'
+st.markdown("{0}{1}{2}".format(s1,s2,s3))
+
+st.write("レム睡眠は夢を見る事、記憶の統合、学習、創造性と関連しています")
+st.write("レム睡眠の量は睡眠時間全体の5~50%を占めています.成人の平均的なレム睡眠は1.5時間ですが、年齢とともに減少するのが一般的です")
+st.write()
+# 起床時刻と体温上がり初めの差異
+
 #---------------------------
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 # CSVファイル読み込み（例）
@@ -426,47 +470,3 @@ else:
         st.error("CSVファイルに少なくとも6列のデータが必要です。")
 #---------------------------
 
-
-
-# 小数点切り捨て
-n = 1
-m = duration_in_hrs / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
-new_duration_in_hrs = math.floor(m * 10 ** n) / (10 ** n)
-
-ss1 = '今日の睡眠時間は'
-ss2 = new_duration_in_hrs
-ss3 = '時間でした'
-st.markdown("{0}{1}{2}".format(ss1,ss2,ss3))
-
-
-#レム睡眠
-# 小数点切り捨て
-n = 1
-m = rem_sleep_duration / 3600 #total_sleep_durationは秒数で表しているので,3600で割れば時間が出る
-#new_rem_sleep_duration = math.floor(m * 10 ** n) / (10 ** n)
-new_rem_sleep_duration = round(m,2)
-
-
-sss1 = 'レム睡眠は'
-sss2 = new_rem_sleep_duration
-sss3 = '時間でした'
-st.markdown("{0}{1}{2}".format(sss1,sss2,sss3))
-
-#レム睡眠の割合
-new1_rem_sleep_duration = (new_rem_sleep_duration * 0.6) * 100
-
-min_duration_in_hrs = new_duration_in_hrs * 60
-
-rem_ratio = (new1_rem_sleep_duration / min_duration_in_hrs) * 100
-
-# 小数点切り捨て
-new_rem_ratio = math.floor(rem_ratio * 10 ** n) / (10 ** n) 
-s1 = 'レム睡眠の割合は'
-s2 = new_rem_ratio
-s3 = '％です'
-st.markdown("{0}{1}{2}".format(s1,s2,s3))
-
-st.write("レム睡眠は夢を見る事、記憶の統合、学習、創造性と関連しています")
-st.write("レム睡眠の量は睡眠時間全体の5~50%を占めています.成人の平均的なレム睡眠は1.5時間ですが、年齢とともに減少するのが一般的です")
-st.write()
-# 起床時刻と体温上がり初めの差異
