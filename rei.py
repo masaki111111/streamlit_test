@@ -51,13 +51,15 @@ st.write('終了日は：', result[1])
 st.title("日時選択アプリ")
 
 # 日付と時刻の入力
-date_input = st.date_input("基準となる日付を選択してください")
-time_input = st.time_input("基準となる時刻を選択してください")
+date_input1 = st.date_input("基準となる日付を選択してください")
+date_input2 = datetime.strptime(date_input1, '%d.%m.%Y %H:%M:%S')
+time_input1 = st.time_input("基準となる時刻を選択してください")
+time_input2 = datetime.strptime(time_input1, '%d.%m.%Y %H:%M:%S')
 
 # 型の確認と結合
-if isinstance(date_input, datetime.date) and isinstance(time_input, datetime.time):
+if isinstance(date_input2, datetime.date) and isinstance(time_input2, datetime.time):
     # 日付と時刻を結合
-    user_datetime = datetime.combine(date_input, time_input)
+    user_datetime = datetime.combine(date_input2, time_input2)
     #st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
 else:
     st.error("日付または時刻の入力が正しくありません。")
