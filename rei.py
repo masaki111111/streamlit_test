@@ -85,29 +85,29 @@ else:
 
 
 # 音声再生のためのJavaScript
-    def play_sound():
-        sound_script = """
-        <script>
-        var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
-          audio.play();
-        </script>
-        """
-        st.markdown(sound_script, unsafe_allow_html=True)
+        def play_sound():
+            sound_script = """
+            <script>
+            var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
+              audio.play();
+            </script>
+            """
+            st.markdown(sound_script, unsafe_allow_html=True)
 
 # アラームの設定
-    alarm_time = st.text_input("アラームの時間を入力してください (HH:MM:SS)", "15:30:00")
-    current_time_placeholder = st.empty()
+        alarm_time = st.text_input("アラームの時間を入力してください (HH:MM:SS)", "15:30:00")
+        current_time_placeholder = st.empty()
 
-    while True:
-        current_time = datetime.now().strftime("%H:%M:%S")
-        current_time_placeholder.text(f"現在の時刻: {current_time}")
+        while True:
+            current_time = datetime.now().strftime("%H:%M:%S")
+            current_time_placeholder.text(f"現在の時刻: {current_time}")
 
-        if current_time == alarm_time:
-            st.warning("アラーム時間です！")
-            play_sound()
-            break
+            if current_time == alarm_time:
+                st.warning("アラーム時間です！")
+                play_sound()
+                break
 
-        time.sleep(1)  # 1秒間隔で更新
+            time.sleep(1)  # 1秒間隔で更新
 
                 
             
