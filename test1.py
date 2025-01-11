@@ -178,9 +178,9 @@ new_datetime_yd = plot_data_yd['date_time_local'] + datetime.timedelta(days=1)
 #df_dby = pd.read_csv('data/CORE_data_dby.csv', sep = ';', header = 1)
 try:
     df_dby = pd.read_csv(csv_file_path, sep = ';', header = 1,)
-    st.write("CSVファイルの読み込みに成功しました。")
+    #st.write("CSVファイルの読み込みに成功しました。")
 except Exception as e:
-    st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
+    #st.error(f"CSVファイルの読み込み中にエラーが発生しました: {e}")
     st.stop()
 
 data_dby = pd.to_datetime(df_dby.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
