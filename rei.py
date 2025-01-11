@@ -39,8 +39,12 @@ except Exception as e:
 
 # 使用者に基準となる日時を入力してもらう
 # 日時の入力 (日付と時間を分けて入力)
-# 時刻の入力
-time_input = st.time_input("基準となる時刻を選択してください")
+
+min_date = datetime.date(1900, 1, 1)
+max_date = datetime.date(2100, 12, 31)
+result = st.slider('調査期間を指定してください。', value=(min_date, max_date), format='YYYY-MM-DD (ddd)', min_value=min_date, max_value=max_date)
+st.write('開始日は：', result[0])
+st.write('終了日は：', result[1])
 
 # 入力内容を表示
 st.write(f"選択した時刻: {time_input}")
