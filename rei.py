@@ -24,9 +24,9 @@ df = "data/05_12_2024_DA38DDB3C43F_history.csv"
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
   
-except Exception as e:
+#except Exception as e:
 
-    st.stop()
+    #st.stop()
 
 data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
 
