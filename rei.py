@@ -47,26 +47,36 @@ st.write('開始日は：', result[0])
 st.write('終了日は：', result[1])
 
 
-# 日付入力。
-date = st.date_input("日付")
-st.write(f"選択された日付: {date}")
 
-# 時間入力。
-time = st.time_input("時刻")
-st.write(f"選択された時刻: {time}")
+# サンプルデータフレーム
+dff = pd.DataFrame({"Time": [1, 2, 3, 4]})
 
-# 日付と時刻の結合
-if date and time:
-    user_datetime = datetime.combine(date, time)
-    st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
-else:
-    st.error("日付または時刻が未選択です。")
-st.write(f"選択された時刻: {user_datetime}")
+# ユーザー入力
+start_date = st.date_input('Enter start date', value=datetime.date.today())
+start_time = st.time_input('Enter start time', value=datetime.datetime.now().time())
 
-if user_datetime:
+# 入力値から開始日時を計算
+try:
+    start_datetime = datetime.datetime.combine(start_date, start_time)
+
+    # 新しい列を作成
+    dff["DateTime"] = [start_datetime + datetime.timedelta(seconds=time) for time in df["Time"]]
+
+    # フォーマットを変更
+    dff["DateTime"] = pd.to_datetime(df["DateTime"]).dt.strftime("%d/%m/%Y %H:%M:%S")
+
+    # 不要列を削除
+    dff = dff.drop(columns=["Time"])
+
+    # 結果を表示
+    st.dataframe(dff)
+except Exception as e:
+    st.error(f"エラーが発生しました: {e}")
+
+if dff:
     try:
         # 入力された日時をdatetime型に変換
-        input_time = datetime.strptime(user_datetime, '%d.%m.%Y %H:%M:%S')
+        input_time = datetime.strptime(dff, '%d.%m.%Y %H:%M:%S')#user_datetime
 
         # データを日時順にソート
         df = df.sort_values('datetime')
