@@ -22,9 +22,9 @@ import streamlit.components.v1 as stc
 import base64
 import time
 
-button = st.button('アプリ実行')
+#button = st.button('アプリ実行')
 
-if button:
+#if button:
 
     audio_path1 = 'data/short-8bit-05.wav' #入力する音声ファイル
 
