@@ -93,21 +93,25 @@ else:
             st.caption("眠り始めの90分で、いかに深く、質の良い睡眠がとれるかで睡眠全体の質が変わります睡眠に影響を及ぼす体の温度には2種類あり、体の内部を指す「深部体温」は、睡眠中に下がり臓器や筋肉、脳などを休ませます。")
             st.caption("もう1つは「皮膚温度」です。目が覚めている時は通常、深部体温のほうが皮膚温度よりも2℃ほど高いです。そして、入眠前には皮膚温度が上昇し、手足がポカポカすることで放熱を行い、深部体温を下げ、皮膚温度と深部体温の差が2℃以下に縮まることで、黄金の90分が生まれます。")
             # 皮膚温度が下がり始めたタイミングを検出
-            for i in range(len(skin_temp) - 1, 5, -1):
+        if len(skin_temp) >= 16 and len(core_temp) >= 16:
+            # 皮膚温度と深部体温の変化を検出
+            for i in range(len(skin_temp) - 1, 9, -1):
                 # 10行の平均を更新
-                past_skin_avg = skin_temp.iloc[i-700:i-60].mean()
-                current_skin_avg = skin_temp.iloc[i-10:i].mean()
+                past_skin_avg = skin_temp.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                current_skin_avg = skin_temp.iloc[i-10:i].mean()  # 現在10行
+                past_core_avg = core_temp.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                current_core_avg = core_temp.iloc[i-10:i].mean()  # 現在10行
 
-                if current_skin_avg < past_skin_avg:
-                    # 下がり始めたタイミングの行を表示
-                    st.warning(f"皮膚温度が下がり始めたタイミングの行: {i+1}, 時刻: {df_after_22.iloc[i]['datetime']}")
-                    break  # 最初に下がり始めたタイミングで終了
-                    
-            # 条件を判定
-            if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
-                st.success("条件を満たしました: 皮膚温度は上昇し、深部体温は下降しています。")
+                # 皮膚温度が上昇し、深部体温が下降しているか判定
+                if current_skin_avg > past_skin_avg and current_core_avg < past_core_avg:
+                    # 皮膚温度が上がり、深部体温が下がり始めたタイミングの行を表示
+                    st.warning(f"皮膚温度が上昇し、深部体温が下降しているタイミングの行: {i+1}, 時刻: {df_after_22.iloc[i]['datetime']}")
+                    break  # 最初に条件を満たしたタイミングで終了
+
             else:
-                st.info("条件を満たしていません。")
+                st.info("皮膚温度が上昇し、深部体温が下降しているタイミングは見つかりませんでした。")
+
+            
         else:
             st.warning("22時以降のデータが16行以上必要です。")
     else:
