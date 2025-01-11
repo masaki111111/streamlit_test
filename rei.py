@@ -66,10 +66,16 @@ else:
             past_core_avg2 = core_temp.iloc[-40:-30].mean()
             current_core_avg = core_temp.iloc[-10:].mean()
 
+            skinsub = past_skin_avg1 - current_skin_avg
+
+            coresub = past_core_avg1 - current_core_avg
+            
             # 平均値を表示
             st.write(f"1時間前の平均皮膚温度: {past_skin_avg1:.2f}",f"。30分前の平均皮膚温度: {past_skin_avg2:.2f}",f"。現在の平均皮膚温度: {current_skin_avg:.2f}")
-
+            st.write(f"1時間前の平均皮膚温度: {skinsub:.2f}")
+            
             st.write(f"1時間前の平均深部体温: {past_core_avg1:.2f}",f"。30前の平均深部体温: {past_core_avg2:.2f}",f"。現在の平均深部体温: {current_core_avg:.2f}")
+
 
 
             st.caption("皮膚温が上がって深部体温が下がっている場合眠るのに良いタイミングです")
