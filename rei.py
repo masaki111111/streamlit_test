@@ -26,7 +26,7 @@ button = st.button('アプリ実行')
 
 if button:
 
-    audio_path1 = 'sample.wav' #入力する音声ファイル
+    audio_path1 = 'data/short-8bit-05.wav' #入力する音声ファイル
 
     audio_placeholder = st.empty()
 
