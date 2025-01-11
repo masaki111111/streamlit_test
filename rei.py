@@ -17,30 +17,37 @@ import pytz
 import streamlit as st
 import pandas as pd
 import datetime
+import streamlit as st
+import streamlit.components.v1 as stc
+import base64
+import time
 
-# 音声を再生するJavaScriptコード
-def play_sound():
-    sound_script = """
-    <script>
-    // 音声の再生
-    var audio = new Audio("https://www.soundjay.com/button/beep-07.wav");
-    audio.loop = true;  // 音声をループ再生
-    audio.play();
+button = st.button('アプリ実行')
+
+if button:
+
+    audio_path1 = 'sample.wav' #入力する音声ファイル
+
+    audio_placeholder = st.empty()
+
+    file_ = open(audio_path1, "rb")
+    contents = file_.read()
+    file_.close()
+
+    audio_str = "data:audio/ogg;base64,%s"%(base64.b64encode(contents).decode())
+    audio_html = """
+                    <audio autoplay=True>
+                    <source src="%s" type="audio/ogg" autoplay=True>
+                    Your browser does not support the audio element.
+                    </audio>
+                """ %audio_str
+
+    audio_placeholder.empty()
+    time.sleep(0.5) #これがないと上手く再生されません
+    audio_placeholder.markdown(audio_html, unsafe_allow_html=True)
+
     
-    // 5秒後に停止
-    setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0; // 再生位置をリセット
-    }, 5000);
-    </script>
-    """
-    st.markdown(sound_script, unsafe_allow_html=True)
-
-# ボタンをクリックしたらアラームを鳴らす
-if st.button("アラームを鳴らす"):
-    st.write("アラームが鳴っています...")
-    play_sound()
-
+#-----------------------------------------------------------------
 #csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
 csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 
