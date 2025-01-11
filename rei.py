@@ -55,8 +55,12 @@ st.write(f"選択された日付: {date}")
 time = st.time_input("時刻")
 st.write(f"選択された時刻: {time}")
 
-user_datetime = data + time
-
+# 日付と時刻の結合
+if date and time:
+    user_datetime = datetime.combine(date, time)
+    st.write(f"選択された日時: {user_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
+else:
+    st.error("日付または時刻が未選択です。")
 st.write(f"選択された時刻: {user_datetime}")
 
 if user_datetime:
