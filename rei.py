@@ -52,9 +52,9 @@ st.title("日時選択アプリ")
 
 # 日付と時刻の入力
 date_input1 = st.date_input("基準となる日付を選択してください")
-date_input2 = datetime.strptime(date_input1, '%d.%m.%Y %H:%M:%S')
+date_input2 = datetime.strptime(date_input1, '%d.%m.%Y')
 time_input1 = st.time_input("基準となる時刻を選択してください")
-time_input2 = datetime.strptime(time_input1, '%d.%m.%Y %H:%M:%S')
+time_input2 = datetime.strptime(time_input1, '%H:%M:%S')
 
 # 型の確認と結合
 if isinstance(date_input2, datetime.date) and isinstance(time_input2, datetime.time):
