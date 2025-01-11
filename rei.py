@@ -18,7 +18,8 @@ import streamlit as st
 import pandas as pd
 import datetime
 
-csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
+#csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
+csv_file_path = "data\11_06_15_2024_DA38DDB3C43F_history.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
