@@ -156,3 +156,197 @@ else:
             st.warning("22時以降のデータが16行以上必要です。")
     else:
         st.error("CSVファイルに少なくとも6列のデータが必要です。")
+
+#下から場合によって消す
+#----------------------------------Oura API--------------------------------------------
+
+#期間を指定
+start_text = dt_now
+
+url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
+params={ 
+    'start_date': '2025-01-08'#start_text,#'2024-06-28', 
+
+}
+headers = { 
+  'Authorization': 'Bearer  OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
+}
+response = requests.get(url, headers=headers, params=params) 
+#st.write(response.text) #データを表示
+
+
+
+a2 = response.json()
+#st.write(a2)#これでJsonデータが整列される
+
+
+#1つの睡眠についてのドキュメント
+import requests 
+url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
+params={ 
+    'start_date': '2025-01-08'#2024 06 30
+   
+}
+
+headers = { 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
+}
+response = requests.request('GET', url, headers=headers, params=params) 
+a1 =response.json()
+#st.write(a1)#これでJsonデータが整列される
+
+
+#シングルスリープドキュメント(就寝と起床の時間を取得)
+url = 'https://api.ouraring.com/v2/usercollection/sleep'
+params = {
+    'start_date': '2025-01-08'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
+    #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
+}
+headers = { 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
+    #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ　大きいほう
+    #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS　小さいほう
+}
+response = requests.get(url, headers=headers, params=params) 
+#st.write(response)#jsonデータ取得
+a0 = response.json()
+#st.write(a0)#これでJsonデータが整列される
+
+#変数に就寝と起床の時間を代入
+date1 = (a0["data"][0]["bedtime_start"])
+date2 = (a0["data"][0]["bedtime_end"])
+
+
+
+#フォーマット変更
+date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+date_start0 = date_start0.tz_localize(None)
+
+date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+date_end0 = date_end0.tz_localize(None)
+
+
+
+
+b = (a2["data"][0]["score"])#変数に一日目のスコアを代入
+
+duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+
+#x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
+
+
+#-----------------------------------core データ----------------------------------------------------
+
+
+y = df.iloc[:,2]
+plot_data = pd.DataFrame(data)
+plot_data['Temp'] = y
+
+#st.write("取得したデータ")
+#st.write(plot_data)
+#st.write(plot_data['Temp'])
+
+#st.write("データフレームの列名:")
+#st.write(df.columns)
+
+# COREの前日データ取得
+#df_yd = pd.read_csv('data/CORE_data_yd.csv', sep = ';', header = 1,)
+try:
+    df_yd = pd.read_csv(csv_file_path, sep = ';', header = 1,)
+ 
+except Exception as e:
+  
+    st.stop()
+
+data_yd = pd.to_datetime(df_yd.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
+
+y_yd = df_yd.iloc[:,2]
+plot_data_yd = pd.DataFrame(data_yd)
+plot_data_yd['Temp'] = y_yd
+new_datetime_yd = plot_data_yd['date_time_local'] + datetime.timedelta(days=1)
+
+
+# COREの一昨日のデータ
+#df_dby = pd.read_csv('data/CORE_data_dby.csv', sep = ';', header = 1)
+try:
+    df_dby = pd.read_csv(csv_file_path, sep = ';', header = 1,)
+    
+except Exception as e:
+    
+    st.stop()
+
+data_dby = pd.to_datetime(df_dby.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
+
+y_dby = df_dby.iloc[:,2]
+plot_data_dby = pd.DataFrame(data_dby)
+plot_data_dby['Temp'] = y_dby
+new_datetime_dby = plot_data_dby['date_time_local'] + datetime.timedelta(days=2)
+
+
+# CORE,Ouraプロット
+fig = go.Figure()
+f1 = go.Scatter(x=plot_data['date_time_local'],
+                         y=plot_data['Temp'],
+                         mode='lines',
+                         name='今日の深部体温',
+                        )
+f2 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
+                         y=plot_data_yd['Temp'],
+                         mode='lines',
+                         name='昨日の深部体温'
+                        )
+
+f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
+                         y=plot_data_dby['Temp'],
+                         mode='lines',
+                         name='一昨日のの深部体温'
+                        )
+
+# 表示グラフ選択
+
+
+
+
+
+
+#----------------------------------Core,ouraプロット--------------------------------------------
+
+
+
+fig = go.Figure()
+fig.add_traces(f1)
+f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
+                         y=plot_data_yd['Temp'],
+                         mode='lines',
+                         name='今日の深部体温'
+                        )
+#変数に今日のスコアを代入
+b = (a2["data"][0]["score"])
+#レム睡眠の長さ
+rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
+
+#今日の睡眠時間
+duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+
+# データトレースを追加
+fig.add_trace(go.Scatter(
+x=[date_start0, date_start0],
+y=[36, 40],
+mode='lines+markers',
+name='入眠時間',
+line=dict(color="Red", width=3)
+))
+fig.add_trace(go.Scatter(
+x=[date_end0, date_end0],
+y=[36, 40],
+mode='lines+markers',
+name='起床時間',
+line=dict(color="Red", width=3)
+))                                                                                                  
+
+st.subheader('今日の概日リズム')                                                
+st.plotly_chart(fig,use_container_width=True)
