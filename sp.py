@@ -112,7 +112,7 @@ else:
                 audio_placeholder.markdown(audio_html, unsafe_allow_html=True)
 
 
-          if past_core_av2 < current_core_av:
+        if past_core_av2 < current_core_av:
               st.write("深部体温が上昇しています二度寝をせずにそのまま起きましょう")
         else:
             　st.write("目覚めはどうでしたか")
