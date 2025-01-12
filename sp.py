@@ -137,15 +137,15 @@ else:
             # 皮膚温度と深部体温の変化を検出
             for i in range(len(skin_temp_6) - 1, 9, -1):
                 # 10行の平均を更新
-                past_skin_avg_6 = skin_temp_6.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                past_skin_avg_6 = skin_temp_6.iloc[i-40:i-30].mean()  # 過去40行-30(30分前の10分平均)
                 current_skin_avg_6 = skin_temp_6.iloc[i-10:i].mean()  # 現在10行
-                past_core_avg_6 = core_temp_6.iloc[i-70:i-60].mean()  # 過去70行-60(一時間前の10分平均)
+                past_core_avg_6 = core_temp_6.iloc[i-40:i-30].mean()  # 過去40行-30(30分前の10分平均)
                 current_core_avg_6 = core_temp_6.iloc[i-10:i].mean()  # 現在10行
 
-                # 皮膚温度下降し、深部体温が上昇しているか判定
+                # 皮膚温度が下降し深部体温が上昇しているか判定
                 if current_skin_avg_6 < past_skin_avg_6 and current_core_avg_6 > past_core_avg_6:
-                    # 皮膚温度が上がり、深部体温が下がり始めたタイミングの行を表示
-                    st.warning(f"皮膚温度が上昇し、深部体温が下降している時刻: {df_after_6.iloc[i]['datetime']}")
+                    # 皮膚温度がしたがり、深部体温が上がり始めたタイミングの行を表示
+                    st.warning(f"深部体温が上昇している時刻: {df_after_6.iloc[i]['datetime']}")
                     break  # 最初に条件を満たしたタイミングで終了
 
             else:
