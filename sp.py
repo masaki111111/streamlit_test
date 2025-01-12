@@ -89,7 +89,7 @@ else:
         if past_core_av1 > current_core_av2:
             if past_core_av2 < past_core_av3:
              if past_core_av3 < past_core_av4:
-        　　  if past_core_av4 < current_core_av:
+              if past_core_av4 < current_core_av:
                 st.write("目覚めるのに最適な時間です")
                 audio_path1 = 'data/short-8bit-05.wav' #入力する音声ファイル
 
