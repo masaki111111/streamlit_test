@@ -31,8 +31,20 @@ except Exception as e:
 
     st.stop()
 
+data = pd.to_datetime(df.iloc[:,1], format = '%d.%m.%Y %H:%M:%S')
+# CSVファイル読み込み（例）
+# df = pd.read_csv('data.csv')
+
+# 日時の変換
+try:
+    df['datetime'] = pd.to_datetime(df.iloc[:, 1], format='%d.%m.%Y %H:%M:%S')
+except Exception as e:
+    st.error("日時情報の変換に失敗しました。形式を確認してください。")
+    st.stop()
+
+
 #-----------------------------------起床のCORE----------------------------------------------
-# 6時以降のデータをフィルタリング（6時～翌日9時の範囲）
+# 6時以降のデータをフィルタリング（6時～9時の範囲）
 
 df_after_22 = df[(df['datetime'].dt.hour >= 6) ]
 
