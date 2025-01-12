@@ -53,7 +53,7 @@ if df_after_6.empty:
 else:
     # データの確認
     st.write("6時以降のデータが表示されます:")
-    st.dataframe(df_after_6)
+    #st.dataframe(df_after_6)
 
     # 6列目（皮膚温度）と3列目（深部体温）のデータを取得
     if len(df_after_6.columns) >= 6:
@@ -90,7 +90,7 @@ else:
             if past_core_av2 < past_core_av3:
              if past_core_av3 < past_core_av4:
               if past_core_av4 < current_core_av:
-                st.write("目覚めるのに最適な時間です")
+                st.write("目覚めるのに最適な時間です。目覚めはどうでしたか？")
                 audio_path1 = 'data/short-8bit-05.wav' #入力する音声ファイル
 
                 audio_placeholder = st.empty()
@@ -115,8 +115,8 @@ else:
         if past_core_av2 < current_core_av:
             st.write("深部体温が上昇しています二度寝をせずにそのまま起きましょう")
         else:
-            st.write("目覚めはどうでしたか")
-            st.caption("現在深部体温が十分に上がっていません")
+            st.write("目覚めはどうでしたか？")
+            st.write("現在深部体温が十分に上がっていません")
              
          
         
