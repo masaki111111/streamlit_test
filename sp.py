@@ -113,10 +113,10 @@ else:
 
 
         if past_core_av2 < current_core_av:
-              st.write("深部体温が上昇しています二度寝をせずにそのまま起きましょう")
+            st.write("深部体温が上昇しています二度寝をせずにそのまま起きましょう")
         else:
-            　st.write("目覚めはどうでしたか")
-            　st.caption("現在深部体温が十分に上がっていません")
+            st.write("目覚めはどうでしたか")
+            st.caption("現在深部体温が十分に上がっていません")
              
          
         
