@@ -61,7 +61,7 @@ else:
         core_temp_6 = df_after_6.iloc[:, 2]  # 3列目（深部体温）
 
         # データが十分にあるか確認
-        if len(skin_temp_6) >= 16 and len(core_temp6) >= 16:
+        if len(skin_temp_6) >= 16 and len(core_temp_6) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
             past_skin_av1 = skin_temp_6.iloc[-70:-60].mean()
             past_skin_av2 = skin_temp_6.iloc[-40:-30].mean()
