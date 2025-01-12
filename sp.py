@@ -160,6 +160,18 @@ else:
 #下から場合によって消す
 #----------------------------------Oura API--------------------------------------------
 
+# 日本のタイムゾーンを設定
+japan_tz = pytz.timezone('Asia/Tokyo')
+
+# 現在の日本時間を取得
+now = datetime.datetime.now(japan_tz)
+dt_now = now.strftime('%Y-%m-%d')
+
+
+# 結果を表示
+print(f"今日の日付 (日本時間): {dt_now}")
+
+
 #期間を指定
 start_text = dt_now
 
