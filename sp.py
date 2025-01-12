@@ -86,7 +86,7 @@ else:
             st.write("")
             
         #深部体温が1時間前,30分前に10分前に上がっている且つ,5分前と比べて下がっているときアラーム(下限のピーク検出)
-        if past_core_av1 > current_core_av2:
+        if past_core_av1 > past_core_av2:
             if past_core_av2 < past_core_av3:
              if past_core_av3 < past_core_av4:
               if past_core_av4 < current_core_av:
