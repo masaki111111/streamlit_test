@@ -354,15 +354,11 @@ fig.add_trace(go.Scatter(
 
 y=[36, 40],
 mode='lines+markers',
-line=dict(color="Red", width=3)
 ))
 fig.add_trace(go.Scatter(
-
-    
 y=[36, 40],
 mode='lines+markers',
 
-line=dict(color="Red", width=3)
 ))                                                                                                  
 
 st.subheader('今日の概日リズム')                                                
