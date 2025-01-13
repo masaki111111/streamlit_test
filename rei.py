@@ -137,6 +137,3 @@ else:
         else:
             st.warning("22時以降のデータが16行以上必要です。")
     else:
-
-
-
