@@ -344,7 +344,7 @@ f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
 #変数に今日のスコアを代入
 b = (a2["data"][0]["score"])
 #レム睡眠の長さ
-rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
+#rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
 #今日の睡眠時間
 duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
