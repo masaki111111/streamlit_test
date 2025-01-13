@@ -336,7 +336,7 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 
 fig = go.Figure()
 fig.add_traces(f1)
-f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
+f1 = go.Scatter(#x=plot_data['date_time_local'],#new_datetime_yd
                          y=plot_data_yd['Temp'],
                          mode='lines',
                          name='今日の深部体温'
