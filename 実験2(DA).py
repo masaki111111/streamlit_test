@@ -351,17 +351,17 @@ b = (a2["data"][0]["score"])
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
-#x=[date_start0, date_start0],
+
 y=[36, 40],
 mode='lines+markers',
-name='入眠時間',
 line=dict(color="Red", width=3)
 ))
 fig.add_trace(go.Scatter(
-#x=[date_end0, date_end0],
+
+    
 y=[36, 40],
 mode='lines+markers',
-name='起床時間',
+
 line=dict(color="Red", width=3)
 ))                                                                                                  
 
