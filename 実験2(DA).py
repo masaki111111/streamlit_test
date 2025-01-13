@@ -185,7 +185,7 @@ params={
 
 }
 headers = { 
-  'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer  OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
     #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
 }
@@ -207,7 +207,7 @@ params={
 }
 
 headers = { 
-  'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ
     #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS
 }
@@ -223,7 +223,7 @@ params = {
     #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
-  'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
+  'Authorization': 'Bearer OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ' 
     #OP5RQS5UOF7KKPYYGMQC4NF6ND6CE4QQ　大きいほう
     #XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS　小さいほう
 }
@@ -233,7 +233,7 @@ a0 = response.json()
 #st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
-#date1 = (a0["data"][0]["bedtime_start"])
+date1 = (a0["data"][0]["bedtime_start"])
 #---------------------エラーが出る場合ここをコメントアウト-----------------------
 #date2 = (a0["data"][0]["bedtime_end"])
 #-----------------------------------------------------------------------------
@@ -243,8 +243,8 @@ a0 = response.json()
 date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
 date_start0 = date_start0.tz_localize(None)
 
-date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_end0 = date_end0.tz_localize(None)
+#date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_end0 = date_end0.tz_localize(None)
 
 
 
