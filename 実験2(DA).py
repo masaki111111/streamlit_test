@@ -251,7 +251,7 @@ a0 = response.json()
 
 b = (a2["data"][0]["score"])#変数に一日目のスコアを代入
 
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
