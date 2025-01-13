@@ -347,7 +347,7 @@ b = (a2["data"][0]["score"])
 #rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
 #今日の睡眠時間
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
