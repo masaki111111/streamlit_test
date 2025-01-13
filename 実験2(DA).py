@@ -240,8 +240,8 @@ a0 = response.json()
 
 
 #フォーマット変更
-date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_start0 = date_start0.tz_localize(None)
+#date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_start0 = date_start0.tz_localize(None)
 
 #date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
 #date_end0 = date_end0.tz_localize(None)
