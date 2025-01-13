@@ -306,7 +306,7 @@ new_datetime_dby = plot_data_dby['date_time_local'] + datetime.timedelta(days=2)
 
 # CORE,Ouraプロット
 fig = go.Figure()
-f1 = go.Scatter(x=plot_data['date_time_local'],
+f1 = go.Scatter(#x=plot_data['date_time_local'],
                          y=plot_data['Temp'],
                          mode='lines',
                          name='今日の深部体温',
