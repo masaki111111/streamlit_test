@@ -231,26 +231,25 @@ a0 = response.json()
 #st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
-date1 = (a0["data"][0]["bedtime_start"])
-
+#date1 = (a0["data"][0]["bedtime_start"])
 #---------------------エラーが出る場合ここをコメントアウト-----------------------
-date2 = (a0["data"][0]["bedtime_end"])
+#date2 = (a0["data"][0]["bedtime_end"])
 #-----------------------------------------------------------------------------
 
 
 #フォーマット変更
-date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_start0 = date_start0.tz_localize(None)
+#date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_start0 = date_start0.tz_localize(None)
 
-date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_end0 = date_end0.tz_localize(None)
+#date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_end0 = date_end0.tz_localize(None)
 
 
 
 
 b = (a2["data"][0]["score"])#変数に一日目のスコアを代入
 
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
@@ -325,10 +324,6 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 # 表示グラフ選択
 
 
-
-
-
-
 #----------------------------------Core,ouraプロット--------------------------------------------
 
 
@@ -341,24 +336,24 @@ f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
                          name='今日の深部体温'
                         )
 #変数に今日のスコアを代入
-b = (a2["data"][0]["score"])
+#b = (a2["data"][0]["score"])
 #レム睡眠の長さ
-rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
+#rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
 #今日の睡眠時間
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
-x=[date_start0, date_start0],
-y=[36, 40],
+#x=[date_start0],
+#y=[36, 40],
 mode='lines+markers',
 name='入眠時間',
 line=dict(color="Red", width=3)
 ))
 fig.add_trace(go.Scatter(
-x=[date_end0, date_end0],
-y=[36, 40],
+#x=[date_end0, date_end0],
+#y=[36, 40],
 mode='lines+markers',
 name='起床時間',
 line=dict(color="Red", width=3)
