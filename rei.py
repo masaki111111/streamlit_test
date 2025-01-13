@@ -73,7 +73,7 @@ else:
             current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
-            past_core_avg1 = core_temp.iloc[-70:-60].mean()
+            past_core_avg1 = core_temp.iloc[-50:-40].mean()
             past_core_avg2 = core_temp.iloc[-40:-30].mean()
             current_core_avg = core_temp.iloc[-10:].mean()
 
