@@ -219,7 +219,7 @@ a1 =response.json()
 #シングルスリープドキュメント(就寝と起床の時間を取得)
 url = 'https://api.ouraring.com/v2/usercollection/sleep'
 params = {
-    'start_date': '2025-01-13'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
+    'start_date': '2025-01-14'#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
     #end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
 }
 headers = { 
@@ -230,28 +230,28 @@ headers = {
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
 a0 = response.json()
-#st.write(a0)#これでJsonデータが整列される
+st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
-#date1 = (a0["data"][0]["bedtime_start"])
+date1 = (a0["data"][0]["bedtime_start"])
 #---------------------エラーが出る場合ここをコメントアウト-----------------------
 #date2 = (a0["data"][0]["bedtime_end"])
 #-----------------------------------------------------------------------------
 
 
 #フォーマット変更
-#date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-#date_start0 = date_start0.tz_localize(None)
+date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+date_start0 = date_start0.tz_localize(None)
 
-#date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-#date_end0 = date_end0.tz_localize(None)
+date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+date_end0 = date_end0.tz_localize(None)
 
 
 
 
 b = (a2["data"][0]["score"])#変数に一日目のスコアを代入
 
-#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
@@ -306,7 +306,7 @@ new_datetime_dby = plot_data_dby['date_time_local'] + datetime.timedelta(days=2)
 
 # CORE,Ouraプロット
 fig = go.Figure()
-f1 = go.Scatter(#x=plot_data['date_time_local'],
+f1 = go.Scatter(x=plot_data['date_time_local'],
                          y=plot_data['Temp'],
                          mode='lines',
                          name='今日の深部体温',
@@ -336,7 +336,7 @@ f3 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_dby
 
 fig = go.Figure()
 fig.add_traces(f1)
-f1 = go.Scatter(#x=plot_data['date_time_local'],#new_datetime_yd
+f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
                          y=plot_data_yd['Temp'],
                          mode='lines',
                          name='今日の深部体温'
@@ -344,21 +344,25 @@ f1 = go.Scatter(#x=plot_data['date_time_local'],#new_datetime_yd
 #変数に今日のスコアを代入
 b = (a2["data"][0]["score"])
 #レム睡眠の長さ
-#rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
+rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
 #今日の睡眠時間
-#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
-
+x=[date_start0],
 y=[36, 40],
 mode='lines+markers',
+name='入眠時間',
+line=dict(color="Red", width=3)
 ))
 fig.add_trace(go.Scatter(
-y=[36, 40],
+#x=[date_end0, date_end0],
+#y=[36, 40],
 mode='lines+markers',
-
+name='起床時間',
+line=dict(color="Red", width=3)
 ))                                                                                                  
 
 st.subheader('今日の概日リズム')                                                
