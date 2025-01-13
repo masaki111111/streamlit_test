@@ -230,21 +230,21 @@ headers = {
 response = requests.get(url, headers=headers, params=params) 
 #st.write(response)#jsonデータ取得
 a0 = response.json()
-st.write(a0)#これでJsonデータが整列される
+#st.write(a0)#これでJsonデータが整列される
 
 #変数に就寝と起床の時間を代入
-date1 = (a0["data"][0]["bedtime_start"])
+#date1 = (a0["data"][0]["bedtime_start"])
 #---------------------エラーが出る場合ここをコメントアウト-----------------------
 #date2 = (a0["data"][0]["bedtime_end"])
 #-----------------------------------------------------------------------------
 
 
 #フォーマット変更
-date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_start0 = date_start0.tz_localize(None)
+#date_start0 =pd.to_datetime(date1, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_start0 = date_start0.tz_localize(None)
 
-date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
-date_end0 = date_end0.tz_localize(None)
+#date_end0 =pd.to_datetime(date2, format='%Y-%m-%dT%H:%M:%S%z')#フォーマットを変更して、タイムゾーン情報を含む形式を指定します
+#date_end0 = date_end0.tz_localize(None)
 
 
 
@@ -351,8 +351,8 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
-x=[date_start0],
-y=[36, 40],
+#x=[date_start0],
+#y=[36, 40],
 mode='lines+markers',
 name='入眠時間',
 line=dict(color="Red", width=3)
