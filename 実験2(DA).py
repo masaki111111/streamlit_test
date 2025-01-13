@@ -251,7 +251,7 @@ a0 = response.json()
 
 b = (a2["data"][0]["score"])#変数に一日目のスコアを代入
 
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 #x_choice = st.radio("", ("今日", "昨日","一昨日"), horizontal=True, args=[1, 0])<3日間のグラフ表示変更>
 
@@ -342,12 +342,12 @@ f1 = go.Scatter(x=plot_data['date_time_local'],#new_datetime_yd
                          name='今日の深部体温'
                         )
 #変数に今日のスコアを代入
-b = (a2["data"][0]["score"])
+#b = (a2["data"][0]["score"])
 #レム睡眠の長さ
 rem_sleep_duration = (a0["data"][0]["rem_sleep_duration"])
 
 #今日の睡眠時間
-duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
+#duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の睡眠時間を代入
 
 # データトレースを追加
 fig.add_trace(go.Scatter(
