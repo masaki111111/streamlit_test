@@ -33,7 +33,7 @@ import time
 #csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/12_01_2025_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/13_01_2025_DA38DDB3C43F_history.csv"
-csv_file_path = "data/16_1.csv"
+csv_file_path = "data/16_2.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
