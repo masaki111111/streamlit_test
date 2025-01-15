@@ -33,7 +33,7 @@ import time
 #csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/12_01_2025_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/13_01_2025_DA38DDB3C43F_history.csv"
-csv_file_path = "data/13_01_2025_C0462D9B6C53_history.csv"
+csv_file_path = "data/16_1.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
@@ -71,12 +71,12 @@ else:
         # データが十分にあるか確認
         if len(skin_temp) >= 16 and len(core_temp) >= 16:
             # 過去10行と現在6行の平均を計算（皮膚温度）
-            past_skin_avg1 = skin_temp.iloc[-70:-60].mean()
+            past_skin_avg1 = skin_temp.iloc[-50:-40].mean()
             past_skin_avg2 = skin_temp.iloc[-40:-30].mean()
             current_skin_avg = skin_temp.iloc[-10:].mean()
 
             # 過去10行と現在6行の平均を計算（深部体温）
-            past_core_avg1 = core_temp.iloc[-70:-60].mean()
+            past_core_avg1 = core_temp.iloc[-50:-40].mean()
             past_core_avg2 = core_temp.iloc[-40:-30].mean()
             current_core_avg = core_temp.iloc[-10:].mean()
 
