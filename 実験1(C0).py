@@ -23,7 +23,7 @@ import time
 
 #csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
-csv_file_path = "data/16_1_1.csv"
+csv_file_path = "data/16_1_2.csv"
 
 
 try:
