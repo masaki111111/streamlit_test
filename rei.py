@@ -61,7 +61,7 @@ if df_after_22.empty:
 else:
     # データの確認
     st.write("22時以降のデータが表示されます:")
-    #st.dataframe(df_after_22)
+    st.dataframe(df_after_22)
 
     # 6列目（皮膚温度）と3列目（深部体温）のデータを取得
     if len(df_after_22.columns) >= 6:
