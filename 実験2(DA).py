@@ -85,8 +85,12 @@ else:
             coresub = past_core_av1 - current_core_av
             
             # 平均値を表示
-            st.write(f"1時間前の平均皮膚温度: {past_skin_av1:.2f}",f"。30分前の平均皮膚温度: {past_skin_av2:.2f}",f"。現在の平均皮膚温度: {current_skin_av:.2f}")
-            st.write(f"1時間前の平均深部体温: {past_core_av1:.2f}",f"。30前の平均深部体温: {past_core_av2:.2f}",f"。現在の平均深部体温: {current_core_av:.2f}")
+            st.write(f"1時間前の平均皮膚温度: {past_skin_av1:.2f}")
+            st.write(f"30分前の平均皮膚温度: {past_skin_av2:.2f}")
+            st.write(f"現在の平均皮膚温度: {current_skin_av:.2f}")
+            st.write(f"1時間前の平均深部体温: {past_core_av1:.2f}")
+            st.write(f"30前の平均深部体温: {past_core_av2:.2f}")
+            st.write(f"現在の平均深部体温: {current_core_av:.2f}")
             st.write("")
             
         #深部体温が1時間前,30分前に10分前に上がっている且つ,5分前と比べて下がっているときアラーム(下限のピーク検出)
