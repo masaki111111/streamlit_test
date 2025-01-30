@@ -48,8 +48,8 @@ end_text = dt_now
 
 url = 'https://api.ouraring.com/v2/usercollection/daily_readiness' 
 params={ 
-    'start_date': '2024-06-28',#start_text,#'2024-06-28', 
-    'end_date': '2024-06-30'#end_text #'2024-06-30'
+    'start_date': '2025-01-27',#start_text,#'2024-06-28', 
+    'end_date': '2025-01-29'#end_text #'2024-06-30'
 }
 headers = { 
   'Authorization': 'Bearer  XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
@@ -67,8 +67,8 @@ a2 = response.json()
 import requests 
 url = 'https://api.ouraring.com/v2/usercollection/daily_sleep'
 params={ 
-    'start_date': '2024-06-28', 
-    'end_date': '2024-06-30'
+    'start_date': '2025-01-27',#start_text,#'2024-06-28', 
+    'end_date': '2025-01-29'#end_text #'2024-06-30'
 }
 headers = { 
   'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
@@ -81,8 +81,8 @@ a1 =response.json()
 #シングルスリープドキュメント(就寝と起床の時間を取得)
 url = 'https://api.ouraring.com/v2/usercollection/sleep'
 params = {
-    'start_date': '2024-06-28',#start_text, #'2024-06-28', #start_text (全期間が欲しい場合)
-    'end_date': '2024-06-30'#end_text #'2024-06-30' #end_text　(全期間が欲しい場合)
+    'start_date': '2025-01-27',#start_text,#'2024-06-28', 
+    'end_date': '2025-01-29'#end_text #'2024-06-30'
 }
 headers = { 
   'Authorization': 'Bearer XYJFZ6LI76CH3JX5VGUUCHT4JGWTEQRS' 
@@ -139,8 +139,7 @@ duration_in_hrs = (a0["data"][0]["total_sleep_duration"])#変数に一日目の�
 #csv_file_path = r"g: " + os.path.join("\マイドライブ\Test1", "file.csv"
 # = r"C:\CORE\介入06-12_2024_DA38DDB3C43F_history.csv"
 #csv_file_path = "data/05_12_2024_DA38DDB3C43F_history.csv"
-csv_file_path = "data/11_06_15_2024_DA38DDB3C43F_history.csv"
-
+csv_file_path = "data/祖母フリーラン_26_29.csv"
 
 try:
     df = pd.read_csv(csv_file_path, sep = ';', header = 1,)
